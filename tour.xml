@@ -1,0 +1,835 @@
+﻿<krpano version="1.22" title="Virtual Tour">
+	
+	<include url="skin/vtourskin.xml" />
+	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
+	<skin_settings maps="false"
+	               maps_type="google"
+	               maps_bing_api_key=""
+	               maps_google_api_key=""
+	               maps_zoombuttons="false"
+	               maps_loadonfirstuse="true"
+	               gyro="false"
+	               gyro_keeplookingdirection="true"
+	               webvr="false"
+	               webvr_keeplookingdirection="false"
+	               webvr_prev_next_hotspots="false"
+	               autotour="false"
+	               littleplanetintro="false"
+	               followmousecontrol="false"
+	               title="false"
+	               thumbs="true"
+	               thumbs_width="200" thumbs_height="130" thumbs_padding="20" thumbs_crop="0|40|240|160"
+	               thumbs_opened="false"
+	               thumbs_text="true"
+	               thumbs_dragging="true"
+	               thumbs_onhoverscrolling="false"
+	               thumbs_scrollbuttons="false"
+	               thumbs_scrollindicator="false"
+	               thumbs_loop="false"
+	               tooltips_buttons="false"
+	               tooltips_thumbs="false"
+	               tooltips_hotspots="true"
+	               tooltips_mapspots="false"
+	               deeplinking="false"
+	               loadscene_flags="MERGE"
+	               loadscene_blend="OPENBLEND(0.5, 0.0, 0.75, 0.05, linear)"
+	               loadscene_blend_prev="SLIDEBLEND(0.5, 180, 0.75, linear)"
+	               loadscene_blend_next="SLIDEBLEND(0.5,   0, 0.75, linear)"
+	               loadingtext=""
+	               layout_width="100%"
+	               layout_maxwidth="100%"
+	               controlbar_width="-24"
+	               controlbar_height="40"
+	               controlbar_offset="20"
+	               controlbar_offset_closed="-40"
+	               controlbar_overlap.no-fractionalscaling="10"
+	               controlbar_overlap.fractionalscaling="0"
+	               design_skin_images="vtourskin 3.png"
+	               design_bgcolor="0x2D3E50"
+	               design_bgalpha="0"
+	               design_bgborder="0"
+	               design_bgroundedge="0.5"
+	               design_bgshadow="0 4 10 0x000000 0"
+	               design_thumbborder_bgborder="4 0xA68C3F 1.0"
+	               design_thumbborder_padding="2"
+	               design_thumbborder_bgroundedge="16"
+	               design_text_css="
+				   color:#ffffff;
+				   font-size:12px;
+				   background-color:rgb(0 0 0 / 60%);
+				   padding:.5rem 1rem;
+				   display:flex;
+				   align-items:center;
+				   justify-content:center;
+				   text-align:center;
+				   max-width:fit-content;
+				   border-radius:2rem;
+				   align-content:center;
+				   position:absolute;
+				   left:35%!important;
+				   " 
+	               design_text_shadow="1"
+	               />
+
+	<!--
+	    For an alternative skin design either change the <skin_settings> values 
+	    from above or optionally include one of the predefined designs from below.
+	-->
+	<!-- <include url="skin/vtourskin_design_flat_light.xml"  /> -->
+	<!-- <include url="skin/vtourskin_design_glass.xml"       /> -->
+	<!-- <include url="skin/vtourskin_design_ultra_light.xml" /> -->
+	<!-- <include url="skin/vtourskin_design_117.xml"         /> -->
+	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
+	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
+
+  <!-- Call this action on startup -->
+	<scene name="intro" nextscene="Gallery1" title="Intro" onstart="add_next_scene_thumb_hotspot();" thumburl="panos/38_1_Pano_Entrance_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading=""  soundurl="sounds/tr1.mp3" >
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="104.080" vlookat="3.561" fovtype="MFOV" fov="140.000" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/38_1_Pano_Entrance_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/38_1_Pano_Entrance_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+		<hotspot name="spot1695555570"  type="image"  style="defaultHotspot" ath="114.623" atv="2.211" linkedscene="Gallery1"  linkedscene_lookat="81.0,8.43,144.26"></hotspot>
+		
+	</scene>
+
+	<scene name="Gallery1" nextscene="Gallery1-2" onstart="delayedcall(1, lookto(40.62, 17.25, 140, 4));playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)"  title="G1" thumburl="panos/01_2_Pano_G1_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="" soundurl="sounds/tr2.mp3" >
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="79.319" vlookat="7.202" fovtype="MFOV" fov="140.000" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/01_2_Pano_G1_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/01_2_Pano_G1_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="hotspot1"  style="defaultHotspot"  ath="107.586" atv="5.047" depth="1000.0" linkedscene="Gallery2" linkedscene_lookat="108.77,5.77,159.57" />
+		<hotspot name="hotspotSameRoom" id="testID" style="defaultHotspot" ath="81.643" atv="10.467" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" />
+		<hotspot name="fossil_skeleton"  style="infoHotspot"  ath="40.176" atv="3.994"  depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('QM.2018.0147'))"/>
+		<hotspot name="spot1718195525"  style="infoHotspot" ath="-30.726" atv="5.383" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('RPN.2018.0001'))"/>
+		<hotspot name="spot1718828530" style="defaultHotspot" ath="-116.468" atv="12.481" depth="4000.0" distorted="false" zoom="false" linkedscene="intro" linkedscene_lookat="-58.5,-2.23,157.1" />
+	</scene>
+
+	<scene name="Gallery1-2" title="G1" onstart="delayedcall(1, lookto(-0.04,18.48,140,2));playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/02_1_Pano_G1_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="" soundurl="sounds/welcome(1).mp3">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/02_1_Pano_G1_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/02_1_Pano_G1_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1718045400" style="defaultHotspot" ath="174.185" atv="21.936" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1" linkedscene_lookat="79.32,7.2,155.11" />
+		<hotspot name="desert_rose" style="infoHotspot" ath="-117.422" atv="20.698" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('QNM.2013.88.98'))"/>
+		<hotspot name="fossil_skeleton" style="infoHotspot" ath="-85.849" atv="7.628" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('QM.2018.0147'))"/>
+
+	</scene>
+
+	<scene name="Gallery2" title="Gallery 2" onstart="delayedcall(1, lookto(365, 0, 400));playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/03_1_Pano_G2_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="" soundurl="sounds/welcome(2).mp3">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/03_1_Pano_G2_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/03_1_Pano_G2_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695547675" style="defaultHotspot" ath="46.83" atv="9.767" depth="1000.0" linkedscene="Gallery2-2" linkedscene_lookat="-56.23,0.64,146.97" />
+		<hotspot name="spot1695547887" style="defaultHotspot" ath="-15.799" atv="7.074" depth="1000.0" linkedscene="Gallery1" linkedscene_lookat="-97.54,15.59,155.11" />
+		<hotspot name="spot1695548074" style="defaultHotspot" ath="-56.738" atv="5.982" depth="1000.0" linkedscene="Gallery2-1" linkedscene_lookat="-7.27,5.45,162.68" />
+		<hotspot name="Wale_Shark" style="infoHotspot" ath="7.622" atv="-21.247" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery2-1" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('RPN.2018.0355'))"/>
+
+	</scene>
+
+	<scene name="Gallery2-1" title="Gallery 2" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/04_1_Pano_G2_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/04_1_Pano_G2_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/04_1_Pano_G2_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1718816875" style="defaultHotspot" ath="-146.926" atv="8.305" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery2" linkedscene_lookat="135.5,8.92,157.85" />
+
+	</scene>
+
+	<scene name="Gallery2-2" title="Gallery 2" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/05_1_Pano_G2_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/05_1_Pano_G2_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/05_1_Pano_G2_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695548286" style="defaultHotspot" ath="-55.902" atv="6.847" depth="1000.0" linkedscene="Gallery3" linkedscene_lookat="111.75,6.64,149.44" />
+		<hotspot name="spot1718046100" style="defaultHotspot" ath="93.448" atv="8.703" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery2" linkedscene_lookat="-182.27,0.42,144.22" />
+
+	</scene>
+
+	<scene name="Gallery3" title="Gallery 3" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/06_1_Pano_G3_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/06_1_Pano_G3_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/06_1_Pano_G3_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695548467" style="defaultHotspot" ath="124.21" atv="10.804" depth="1000.0" linkedscene="Gallery3-1" linkedscene_lookat="-33.42,6.77,157.89" />
+		<hotspot name="spot1718045752" style="defaultHotspot" ath="-61.933" atv="12.593" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery2-2" linkedscene_lookat="114.82,7.04,154.01" />
+
+	</scene>
+
+	<scene name="Gallery3-1" title="Gallery 3" onstart="delayedcall(1, lookto(430, 0, 400));playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/07_1_Pano_G3_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/07_1_Pano_G3_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/07_1_Pano_G3_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695548641" style="defaultHotspot" ath="127.167" atv="8.569" depth="1000.0" linkedscene="Gallery3" linkedscene_lookat="-64.73,6.23,149.44" />
+		<hotspot name="spot1695548796" style="defaultHotspot" ath="88.151" atv="7.852" depth="1000.0" linkedscene="Gallery3-3" linkedscene_lookat="83.34,3.37,151.79" />
+
+	</scene>
+
+	<scene name="Gallery3-2" title="Gallery 3" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/08_1_Pano_G3_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/08_1_Pano_G3_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/08_1_Pano_G3_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="Gallery3-3" title="Gallery 3" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/09_1_Pano_G3_Reconstructed_b2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/09_1_Pano_G3_Reconstructed_b2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/09_1_Pano_G3_Reconstructed_b2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695548977" style="defaultHotspot" ath="72.032" atv="5.621" depth="1000.0" linkedscene="Gallery3-4" linkedscene_lookat="-44.06,-0.64,161.17" />
+		<hotspot name="spot1718818225" style="defaultHotspot" ath="-97.739" atv="16.497" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery3-1" linkedscene_lookat="-90.52,-0.8,146.94" />
+
+	</scene>
+
+	<scene name="Gallery3-4" title="Gallery 3" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/10_1_Pano_G3_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/10_1_Pano_G3_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/10_1_Pano_G3_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695549126" style="defaultHotspot" ath="-61.062" atv="7.025" depth="1000.0" linkedscene="Gallery4" linkedscene_lookat="195.89,6.67,161.19" />
+		<hotspot name="spot1718817982" style="defaultHotspot" ath="125.938" atv="10.808" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery3-3" linkedscene_lookat="-107.75,1.58,138.32" />
+
+	</scene>
+
+	<scene name="Gallery4" title="Gallery 4" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/11_1_Pano_G4_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/11_1_Pano_G4_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/11_1_Pano_G4_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695549676" style="defaultHotspot" ath="124.58" atv="4.743" depth="1000.0" linkedscene="Gallery4-2" linkedscene_lookat="15.8,0.32,144.2" />
+		<hotspot name="spot1695549937" style="defaultHotspot" ath="-157.048" atv="9.292" depth="1000.0" linkedscene="Gallery4-1" linkedscene_lookat="68.87,4.16,144.13" />
+		<hotspot name="spot1718817778" style="defaultHotspot" ath="78.993" atv="9.457" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery3-4" linkedscene_lookat="138.88,6.99,144.17" />
+
+	</scene>
+
+	<scene name="Gallery4-1" title="Gallery 4" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/12_1_Pano_G4_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/12_1_Pano_G4_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/12_1_Pano_G4_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1718046617" style="defaultHotspot" ath="-19.028" atv="3.834" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery4-2" linkedscene_lookat="29.01,3.04,154.03" />
+
+	</scene>
+
+	<scene name="Gallery4-2" title="Gallery 4" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/13_1_Pano_G4_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/13_1_Pano_G4_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/13_1_Pano_G4_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695550291" style="defaultHotspot" ath="43.258" atv="3.879" depth="1000.0" linkedscene="Gallery5" linkedscene_lookat="-34.57,10.23,162.72" />
+		<hotspot name="spot1718819543" style="defaultHotspot" ath="143.978" atv="4.704" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery4-1" linkedscene_lookat="144.14,12.35,141.25" />
+		<hotspot name="spot1718819810" style="defaultHotspot" ath="176.074" atv="5.026" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery4" linkedscene_lookat="-74.06,1.22,146.95" />
+
+	</scene>
+
+	<scene name="Gallery5" title="Gallery 5" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/14_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/14_1_Pano_G5_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/14_1_Pano_G5_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695550560" style="defaultHotspot" ath="9.812" atv="9.167" depth="1000.0" linkedscene="Gallery5-1" linkedscene_lookat="-214.68,-5.3,144.04" />
+		<hotspot name="spot1695550978" style="defaultHotspot" ath="46.793" atv="5.783" depth="1000.0" linkedscene="Gallery5-2" linkedscene_lookat="199.67,0.31,164.05" />
+		<hotspot name="spot1718819351" style="defaultHotspot" ath="132.622" atv="3.938" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery4-2" linkedscene_lookat="250.84,5.19,149.46" />
+
+	</scene>
+
+	<scene name="Gallery5-1" title="Gallery 5" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/15_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/15_1_Pano_G5_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/15_1_Pano_G5_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1718818765" style="defaultHotspot" ath="-82.043" atv="10.659" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery5-2" linkedscene_lookat="-169.57,-5.52,157.74" />
+		<hotspot name="spot1718819190" style="defaultHotspot" ath="15.654" atv="5.704" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery5" linkedscene_lookat="-182.16,8.28,143.9" />
+
+	</scene>
+
+	<scene name="Gallery5-2" title="Gallery 5" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/16_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/16_1_Pano_G5_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/16_1_Pano_G5_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695551170" style="defaultHotspot" ath="102.308" atv="16.471" depth="1000.0" linkedscene="Gallery5-3" linkedscene_lookat="91.18,4.06,153.95" />
+		<hotspot name="spot1718818952" style="defaultHotspot" ath="-33.325" atv="10.557" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery5-1" linkedscene_lookat="58.18,-5.26,144.28" />
+
+	</scene>
+
+	<scene name="Gallery5-3" title="Gallery 5" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/17_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/17_1_Pano_G5_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/17_1_Pano_G5_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695551324" style="defaultHotspot" ath="69.493" atv="12.412" depth="1000.0" linkedscene="Gallery6" linkedscene_lookat="-58.37,6.79,164.04" />
+		<hotspot name="spot1718820314" style="defaultHotspot" ath="-81.454" atv="-5.055" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery5-2" linkedscene_lookat="-94.2,4.49,135.08" />
+
+	</scene>
+
+	<scene name="Gallery6" title="Gallery 6" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/18_1_Pano_G6_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/18_1_Pano_G6_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/18_1_Pano_G6_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695551578" style="defaultHotspot" ath="-120.757" atv="6.691" depth="1000.0" linkedscene="Gallery6-1" linkedscene_lookat="96.31,7.57,141.4" />
+		<hotspot name="spot1695551965" style="defaultHotspot" ath="-48.576" atv="4.417" depth="1000.0" linkedscene="Gallery6-3" linkedscene_lookat="-95.19,7.48,161.02" />
+		<hotspot name="spot1718820185" style="defaultHotspot" ath="165.248" atv="14.007" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery5-3" linkedscene_lookat="-80.17,7.84,141.24" />
+
+	</scene>
+
+	<scene name="Gallery6-1" title="Gallery 6" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/19_1_Pano_G6_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/19_1_Pano_G6_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/19_1_Pano_G6_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1718820575" style="defaultHotspot" ath="-106.044" atv="13.82" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery6" linkedscene_lookat="67.28,4.16,146.87" />
+
+	</scene>
+
+	<scene name="Gallery6-2" title="Gallery 6" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/20_1_Pano_G6_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/20_1_Pano_G6_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/20_1_Pano_G6_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+	</scene>
+
+	<scene name="Gallery6-3" title="Gallery 6" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/21_1_Pano_G6_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/21_1_Pano_G6_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/21_1_Pano_G6_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695552155" style="defaultHotspot" ath="-85.597" atv="11.415" depth="1000.0" linkedscene="Gallery7" linkedscene_lookat="-59.42,5.03,161.2" />
+		<hotspot name="spot1718820926" style="defaultHotspot" ath="50.164" atv="4.402" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery6" linkedscene_lookat="123.74,12.51,147.0" />
+
+	</scene>
+
+	<scene name="Gallery7" title="Gallery 7" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/22_1_Pano_G7_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/22_1_Pano_G7_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/22_1_Pano_G7_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695552320" style="defaultHotspot" ath="79.639" atv="9.28" depth="1000.0" linkedscene="Gallery7-1" linkedscene_lookat="9.45,3.37,157.77" />
+
+	</scene>
+
+	<scene name="Gallery7-1" title="Gallery 7" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/23_1_Pano_G7_2_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/23_1_Pano_G7_2_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/23_1_Pano_G7_2_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695552497" style="defaultHotspot" ath="-50.189" atv="7.477" depth="1000.0" linkedscene="Gallery7-2" linkedscene_lookat="-149.97,-3.87,169.46" />
+		<hotspot name="spot1718821881" style="defaultHotspot" ath="-88.479" atv="12.049" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery7" linkedscene_lookat="264.96,23.49,144.18" />
+
+	</scene>
+
+	<scene name="Gallery7-2" title="Gallery 7" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/24_1_Pano_G7_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/24_1_Pano_G7_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/24_1_Pano_G7_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695552651" style="defaultHotspot" ath="179.07" atv="8.497" depth="1000.0" linkedscene="Gallery7-3" linkedscene_lookat="30.7,1.1,162.59" />
+		<hotspot name="spot1718821696" style="defaultHotspot" ath="17.468" atv="10.26" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery7-1" linkedscene_lookat="85.53,3.84,161.16" />
+
+	</scene>
+
+	<scene name="Gallery7-3" title="Gallery 7" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/25_1_Pano_G7_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/25_1_Pano_G7_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/25_1_Pano_G7_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695552811" style="defaultHotspot" ath="35.791" atv="12.538" depth="1000.0" linkedscene="Gallery8" linkedscene_lookat="-157.71,-2.55,159.55" />
+		<hotspot name="spot1718821476" style="defaultHotspot" ath="-160.177" atv="12.591" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery7-2" linkedscene_lookat="20.46,13.55,162.62" />
+
+	</scene>
+
+	<scene name="Gallery8" title="Gallery 8" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/26_1_Pano_G8_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/26_1_Pano_G8_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/26_1_Pano_G8_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695552972" style="defaultHotspot" ath="-139.832" atv="1.934" depth="1000.0" linkedscene="Gallery18" linkedscene_lookat="28.19,-0.48,155.98" />
+		<hotspot name="spot1718822244" style="defaultHotspot" ath="17.201" atv="12.389" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery7-3" linkedscene_lookat="-99.16,-4.05,155.98" />
+
+	</scene>
+
+	<scene name="Gallery8-1" title="Gallery 8" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/27_1_Pano_G8_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/27_1_Pano_G8_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/27_1_Pano_G8_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695553186" style="defaultHotspot" ath="-73.196" atv="6.183" depth="1000.0" linkedscene="Gallery19" linkedscene_lookat="89.12,17.95,155.98" />
+		<hotspot name="spot1718822476" style="defaultHotspot" ath="-172.723" atv="12.155" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery8" linkedscene_lookat="27.5,13.1,144.06" />
+
+	</scene>
+
+	<scene name="Gallery8-2" title="Gallery 8" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/28_1_Pano_G8_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/28_1_Pano_G8_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/28_1_Pano_G8_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695553440" style="defaultHotspot" ath="-114.571" atv="6.315" depth="1000.0" linkedscene="Gallery20" linkedscene_lookat="76.74,7.05,161.23" />
+		<hotspot name="spot1718822895" style="defaultHotspot" ath="-72.184" atv="9.096" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery18" linkedscene_lookat="142.42,2.56,141.45" />
+
+	</scene>
+
+	<scene name="Gallery8-3" title="Gallery 8" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/29_2_Pano_G8_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/29_2_Pano_G8_Reconstructed_B2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/29_2_Pano_G8_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695553603" style="defaultHotspot" ath="110.054" atv="2.336" depth="1000.0" linkedscene="Gallery21" linkedscene_lookat="130.91,7.52,157.87" />
+		<hotspot name="spot1718824718" style="defaultHotspot" ath="-114.973" atv="8.364" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery19" linkedscene_lookat="88.54,3.18,144.4" />
+
+	</scene>
+
+	<scene name="Gallery9" title="Gallery 9" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/30_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/30_1_Pano_G9_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/30_1_Pano_G9_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695553767" style="defaultHotspot" ath="-47.546" atv="10.94" depth="1000.0" linkedscene="Gallery22" linkedscene_lookat="434.39,25.8,167.53" />
+		<hotspot name="spot1718825386" style="defaultHotspot" ath="-63.661" atv="5.335" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery20" linkedscene_lookat="-111.74,11.14,159.54" />
+
+	</scene>
+
+	<scene name="Gallery9-1" title="Gallery 9" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/31_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/31_1_Pano_G9_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/31_1_Pano_G9_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695554118" style="defaultHotspot" ath="20.633" atv="4.975" depth="1000.0" linkedscene="Gallery23" linkedscene_lookat="-103.46,7.17,141.31" />
+		<hotspot name="spot1718825173" style="defaultHotspot" ath="-132.468" atv="10.782" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery21" linkedscene_lookat="113.77,10.29,157.6" />
+
+	</scene>
+
+	<scene name="Gallery9-2" title="Gallery 9" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/32_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/32_1_Pano_G9_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/32_1_Pano_G9_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695554313" style="defaultHotspot" ath="14.693" atv="3.303" depth="1000.0" linkedscene="Gallery24" linkedscene_lookat="169.05,10.14,144.22" />
+		<hotspot name="spot1718825887" style="defaultHotspot" ath="84.985" atv="22.42" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery22" linkedscene_lookat="-152.86,11.84,144.28" />
+
+	</scene>
+
+	<scene name="Gallery9-3" title="Gallery 9" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/33_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/33_1_Pano_G9_Reconstructed.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/33_1_Pano_G9_Reconstructed.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695554477" style="defaultHotspot" ath="133.901" atv="2.027" depth="1000.0" linkedscene="Gallery25" linkedscene_lookat="-78.99,7.37,146.97" />
+		<hotspot name="spot1718826196" style="defaultHotspot" ath="-34.459" atv="13.405" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery23" linkedscene_lookat="-165.99,-6.34,144.25" />
+
+	</scene>
+
+	<scene name="Gallery10" title="G10" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/34_1_Pano_G10_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		<control bouncinglimits="calc:image.cube ? true : false" />
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+		<preview url="panos/34_1_Pano_G10_Reconstructed_B2.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/34_1_Pano_G10_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+		<hotspot name="spot1695554677" style="defaultHotspot" ath="-118.667" atv="4.582" depth="1000.0" linkedscene="Gallery26" linkedscene_lookat="18.75,-0.64,157.8" />
+		<hotspot name="spot1718826434" style="defaultHotspot" ath="119.255" atv="13.044" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery24" linkedscene_lookat="-20.03,0.48,161.2" />
+	</scene>
+	<scene name="Gallery10-1" title="G10" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/35_1_Pano_G10_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		<control bouncinglimits="calc:image.cube ? true : false" />
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+		<preview url="panos/35_1_Pano_G10_Reconstructed_B2.tiles/preview.jpg" />
+		<image>
+			<cube url="panos/35_1_Pano_G10_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+		<hotspot name="spot1695554974" style="defaultHotspot" ath="5.134" atv="20.234" depth="1000.0" linkedscene="Gallery10-2" linkedscene_lookat="23.02,-1.44,144.15" />
+		<hotspot name="spot1695555120" style="defaultHotspot" ath="-100.277" atv="5.009" depth="1000.0" linkedscene="Gallery10-3" linkedscene_lookat="5.35,0.8,163.99" />
+		<hotspot name="spot1718826672" style="defaultHotspot" ath="153.765" atv="14.512" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery25" linkedscene_lookat="39.41,-0.8,146.93" />
+	</scene>
+	<scene name="Gallery10-3" title="G10" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/36_1_Pano_G10_Reconstructed_R2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/36_1_Pano_G10_Reconstructed_R2.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/36_1_Pano_G10_Reconstructed_R2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1695555342" style="defaultHotspot" ath="16.051" atv="2.075" depth="1000.0" linkedscene="Gallery11" linkedscene_lookat="16.02,1.92,162.71" />
+		<hotspot name="spot1718827033" style="defaultHotspot" ath="157.219" atv="13.211" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery10-2" linkedscene_lookat="74.96,8.81,162.62" />
+
+	</scene>
+	<scene name="Gallery11" title="G11" onstart="playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/37_1_Pano_G11_Reconstructed_B2_5.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+		
+		<control bouncinglimits="calc:image.cube ? true : false" />
+
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+
+		<preview url="panos/37_1_Pano_G11_Reconstructed_B2_5.tiles/preview.jpg" />
+
+		<image>
+			<cube url="panos/37_1_Pano_G11_Reconstructed_B2_5.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
+		</image>
+
+		<hotspot name="spot1718827307" style="defaultHotspot" ath="152.998" atv="9.686" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery10-3" linkedscene_lookat="-169.6,0.51,144.13" />
+
+	</scene>
+	
+	<!-- SOUND INTERFACE IMPLEMENTATION -->
+	<plugin name="soundinterface"
+        url="%VIEWER%/plugins/soundinterface.js"
+        preload="true"
+        rootpath=""
+        volume="1.0"
+        mute="false"
+        panningmodel="simple"
+        worldscale="1.0"
+        autopause="true"
+        autounlock="true"
+/>
+<action name="actioner" type="Javascript" autorun="onstart"><![CDATA[
+    for (let i = krpano.hotspot.count - 1; i >= 0; i--) {
+        const hotspot = krpano.hotspot.getItem(i);
+
+        if (hotspot.linkedscene && hotspot.style !== "infoHotspot") {
+            const previewName = "preview_" + hotspot.name;
+            const scene = krpano.scene.getItem(hotspot.linkedscene);
+            const thumbUrl = scene ? (scene.thumburl || `panos/${hotspot.linkedscene}.tiles/thumb.jpg`) : 
+                                     `panos/${hotspot.linkedscene}.tiles/thumb.jpg`;
+
+            if (!krpano.get("hotspot[" + previewName + "]")) {
+                // Add thumbnail preview hotspot
+                krpano.call("addhotspot(" + previewName + ")");
+                // Position adjustments
+                krpano.set("hotspot[" + previewName + "].ath", hotspot.ath + 2);
+                krpano.set("hotspot[" + previewName + "].atv", hotspot.atv + 5);
+                krpano.set("hotspot[" + previewName + "].url", thumbUrl);
+                krpano.set("hotspot[" + previewName + "].scale", 0.4);
+                krpano.set("hotspot[" + previewName + "].alpha", 1);
+                krpano.set("hotspot[" + previewName + "].visible", true);
+                krpano.set("hotspot[" + previewName + "].enabled", true);
+                krpano.set("hotspot[" + previewName + "].zorder", 9999);
+                krpano.set("hotspot[" + previewName + "].renderer", "css3d");
+                krpano.set("hotspot[" + previewName + "].distorted", false);
+                krpano.set("hotspot[" + previewName + "].edge", "centerbottom");
+                krpano.set("hotspot[" + previewName + "].origin", "centerbottom");
+
+                // Set tooltip text for the preview hotspot
+                krpano.set("hotspot[" + previewName + "].tooltip", "Preview: " + hotspot.linkedscene);
+
+                // Add CSS class to thumbnail preview for styling
+                krpano.set("hotspot[" + previewName + "].onloaded",
+                    "js: caller.sprite.classList.add('thumbnail-preview');");
+
+                // Clear manual hover events from the original hotspot since tooltip manages it
+                krpano.set("hotspot[" + hotspot.name + "].onhover", "");
+                krpano.set("hotspot[" + hotspot.name + "].onout", "");
+            }
+        }
+    }
+]]></action>
+
+
+	<action scope="local" name="addimage" args ="test">
+	
+		 
+		tween(hotspot[get(test)].alpha, 1);
+		
+		
+		
+		
+	  </action>
+	  <action scope="local" name="removeimage" args="test">
+		tween(hotspot[get(test)].alpha, 0);
+
+	  </action>
+	  <action name="set_css_style" type="Javascript">
+		caller.sprite.style[ args[1] ] = args[2];
+		caller.sprite.style[ args[3] ] = args[4];
+	  </action>
+
+	  
+
+	<!-- Variables: Spotname, DegreeMapping -->
+	  <action name="scene_hotspot_mapping">
+		degree = view.hlookat + %0;
+		p = get(degree) + "," + get(view.vlookat) + ",120.0";
+		
+		<!-- trace(get(p));
+		trace("Old Scene link ",hotspot[%1].linkedscene_lookat); -->
+		set(hotspot[%1].linkedscene_lookat, get(p));
+		tween(view.distortion, 0.3);
+		trace(view.distortion);
+
+		trace("new Link ",hotspot[%1].linkedscene_lookat);
+		<!-- tween(view.fov, 90, tween(easeinoutcubic, 2)); -->
+
+		<!-- looktohotspot(spot1, 80,tween(easeinoutcubic, 1) ); -->
+		<!-- set(view. hlookat, get(a)); -->
+
+		<!-- trace(view.distortion="0.35" hlookat); -->
+		
+		
+	</action>
+<events onnewscene="rebuild_thumbnails();" />
+
+<action name="rebuild_thumbnails" type="Javascript"><![CDATA[
+    // Remove all existing preview hotspots first
+    for(let i = krpano.hotspot.count - 1; i >= 0; i--) {
+        const hotspot = krpano.hotspot.getItem(i);
+        if(hotspot.name.startsWith("preview_")) {
+            krpano.call("removehotspot(" + hotspot.name + ")");
+        }
+    }
+    // Rebuild thumbnails
+    krpano.call("actioner();");
+]]>
+</action>
+	<action name="set_css_style" type="Javascript">
+		caller.sprite.style[ args[1] ] = args[2];
+		caller.sprite.style[ args[3] ] = args[4];
+	  </action>
+	  <action name="onnewscene">
+    js(console.log("Current scene: " + scene));
+</action>
+
+<events>
+    <onnewscene>onnewscene();</onnewscene>
+</events>
+</krpano>
