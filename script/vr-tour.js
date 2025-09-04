@@ -256,8 +256,6 @@ $(".galleryInfo .close").on("click", function () {
 });
 
 $(document).ready(function () {
-    console.log("[INIT] Document ready");
-
     // Debug SVG load status
     const checkSvg = setInterval(() => {
         const svg = document.querySelector('#svg-map');
@@ -272,14 +270,14 @@ $(document).ready(function () {
         xml: "./tour.xml",
         target: "pano",
         onready: function (krpano) {
-            console.log("[KRPANO] Player loaded");
+     
 
             // ✅ Save globally
             krpanoInterface = krpano;
 
             initializeSceneHandling();
             setTimeout(() => {
-                console.log("[TEST] Simulating Gallery1 load");
+              
                 UpdateActiveRoomFromScene('Gallery1');
             }, 1000);
         }
@@ -372,13 +370,10 @@ let currentGallery = null;
 let showingImageIndex = 1;
 
 function initializeSceneHandling() {
-    console.log("[SYSTEM] Initializing scene handling");
-
     // Set up krpano event listeners
     const krpano = document.getElementById("krpanoSWFObject");
     if (krpano && krpano.set) {
         krpano.set("events.onnewscene", "js(handleSceneChange(get(xml.scene)));");
-        console.log("[SYSTEM] Krpano event listeners attached");
     }
 
     // Initialize hotspot attributes
@@ -386,17 +381,17 @@ function initializeSceneHandling() {
 }
 
 function handleSceneChange(sceneName) {
-    console.log(`[SCENE] Changed to: ${sceneName}`);
+    // console.log(`[SCENE] Changed to: ${sceneName}`);
     UpdateActiveRoomFromScene(sceneName);
 }
 
 function getGalleryByScene(sceneName) {
     const normalizedScene = sceneName.trim();
-    console.log(`[LOOKUP] Finding gallery for scene: "${normalizedScene}"`);
+    // console.log(`[LOOKUP] Finding gallery for scene: "${normalizedScene}"`);
 
     for (const galleryName in galleries) {
         if (galleries[galleryName].scenes.includes(normalizedScene)) {
-            console.log(`[MATCH] Found gallery: "${galleryName}"`);
+            // console.log(`[MATCH] Found gallery: "${galleryName}"`);
             return galleryName;
         }
     }
@@ -597,9 +592,9 @@ $(document).on("click", ".overlay", closeVTPopup);
 $(document).on("click", ".fullScreenStyle", function () {
     $(this).toggleClass("active");
 });
-$(document).on("click", ".galleryDetails", function () {
-    $(this).toggleClass("active");
-});
+$(".galleryDetails").click(function(){
+    $(this).addClass("active");
+})
 $(document).on("click", ".navContainer2 .expandNavigation", function () {
     $(this).toggleClass("active");
     $(".navContainer2").toggleClass("active");

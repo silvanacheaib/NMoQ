@@ -1,7 +1,6 @@
 ﻿<krpano version="1.22" title="Virtual Tour">
 	
 	<include url="skin/vtourskin.xml" />
-	<!-- customize skin settings: maps, gyro, webvr, thumbnails, tooltips, layout, design, ... -->
 	<skin_settings maps="false"
 	               maps_type="google"
 	               maps_bing_api_key=""
@@ -71,19 +70,8 @@
 	               design_text_shadow="1"
 	               />
 
-	<!--
-	    For an alternative skin design either change the <skin_settings> values 
-	    from above or optionally include one of the predefined designs from below.
-	-->
-	<!-- <include url="skin/vtourskin_design_flat_light.xml"  /> -->
-	<!-- <include url="skin/vtourskin_design_glass.xml"       /> -->
-	<!-- <include url="skin/vtourskin_design_ultra_light.xml" /> -->
-	<!-- <include url="skin/vtourskin_design_117.xml"         /> -->
-	<!-- <include url="skin/vtourskin_design_117round.xml"    /> -->
-	<!-- <include url="skin/vtourskin_design_black.xml"       /> -->
 
-  <!-- Call this action on startup -->
-	<scene name="intro" nextscene="Gallery1" title="Intro" onstart="add_next_scene_thumb_hotspot();" thumburl="panos/38_1_Pano_Entrance_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading=""  soundurl="sounds/tr1.mp3" >
+	<scene name="intro" nextscene="Gallery1" title="Intro" onstart="add_next_scene_thumb_hotspot();" soundurl="sounds/tr1.mp3"  thumburl="panos/38_1_Pano_Entrance_Reconstructed.tiles/thumb.jpg">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -98,7 +86,7 @@
 		
 	</scene>
 
-	<scene name="Gallery1" nextscene="Gallery1-2" onstart="delayedcall(1, lookto(40.62, 17.25, 140, 4));playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)"  title="G1" thumburl="panos/01_2_Pano_G1_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="" soundurl="sounds/tr2.mp3" >
+	<scene name="Gallery1" nextscene="Gallery1-2" title="G1"  onstart="delayedcall(1, lookto(40.62, 17.25, 140, 4));playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));add_next_scene_thumb_hotspot();)" soundurl="sounds/tr2.mp3" thumburl="panos/01_2_Pano_G1_Reconstructed_B2.tiles/thumb.jpg">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -110,14 +98,14 @@
 			<cube url="panos/01_2_Pano_G1_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
 		</image>
 
-		<hotspot name="hotspot1"  style="defaultHotspot"  ath="107.586" atv="5.047" depth="1000.0" linkedscene="Gallery2" linkedscene_lookat="108.77,5.77,159.57" />
-		<hotspot name="hotspotSameRoom" id="testID" style="defaultHotspot" ath="81.643" atv="10.467" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" />
+		<hotspot name="hotspot1"  type="image" style="defaultHotspot"  ath="107.586" atv="5.047" depth="1000.0" linkedscene="Gallery2" linkedscene_lookat="108.77,5.77,159.57" />
+		<hotspot name="hotspotSameRoom"  type="image" style="defaultHotspot" ath="81.643" atv="10.467" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" />
 		<hotspot name="fossil_skeleton"  style="infoHotspot"  ath="40.176" atv="3.994"  depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('QM.2018.0147'))"/>
 		<hotspot name="spot1718195525"  style="infoHotspot" ath="-30.726" atv="5.383" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('RPN.2018.0001'))"/>
-		<hotspot name="spot1718828530" style="defaultHotspot" ath="-116.468" atv="12.481" depth="4000.0" distorted="false" zoom="false" linkedscene="intro" linkedscene_lookat="-58.5,-2.23,157.1" />
+		<hotspot name="spot1718828530" type="image" style="defaultHotspot" ath="-116.468" atv="12.481" depth="4000.0" distorted="false" zoom="false" linkedscene="intro" linkedscene_lookat="-58.5,-2.23,157.1" />
 	</scene>
 
-	<scene name="Gallery1-2" title="G1" onstart="delayedcall(1, lookto(-0.04,18.48,140,2));playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/02_1_Pano_G1_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="" soundurl="sounds/welcome(1).mp3">
+	<scene name="Gallery1-2" title="G1" thumburl="panos/02_1_Pano_G1_Reconstructed.tiles/thumb.jpg" onstart="delayedcall(1, lookto(-0.04,18.48,140,2));playaudio();js(showgallDetails(get(scene[get(xml.scene)].title));)"  lat="" lng="" alt="" heading="" soundurl="sounds/welcome(1).mp3">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -727,15 +715,17 @@
     for (let i = krpano.hotspot.count - 1; i >= 0; i--) {
         const hotspot = krpano.hotspot.getItem(i);
 
+        // Only for navigation hotspots (not infoHotspot)
         if (hotspot.linkedscene && hotspot.style !== "infoHotspot") {
             const previewName = "preview_" + hotspot.name;
-            const scene = krpano.scene.getItem(hotspot.linkedscene);
-            const thumbUrl = scene ? (scene.thumburl || `panos/${hotspot.linkedscene}.tiles/thumb.jpg`) : 
-                                     `panos/${hotspot.linkedscene}.tiles/thumb.jpg`;
 
-            if (!krpano.get("hotspot[" + previewName + "]")) {
+            // ✅ Always get thumburl dynamically from scene definition
+            const thumbUrl = krpano.get("scene[" + hotspot.linkedscene + "].thumburl");
+
+            if (thumbUrl && !krpano.get("hotspot[" + previewName + "]")) {
                 // Add thumbnail preview hotspot
                 krpano.call("addhotspot(" + previewName + ")");
+                
                 // Position adjustments
                 krpano.set("hotspot[" + previewName + "].ath", hotspot.ath + 2);
                 krpano.set("hotspot[" + previewName + "].atv", hotspot.atv + 5);
@@ -750,14 +740,14 @@
                 krpano.set("hotspot[" + previewName + "].edge", "centerbottom");
                 krpano.set("hotspot[" + previewName + "].origin", "centerbottom");
 
-                // Set tooltip text for the preview hotspot
+                // Tooltip text
                 krpano.set("hotspot[" + previewName + "].tooltip", "Preview: " + hotspot.linkedscene);
 
                 // Add CSS class to thumbnail preview for styling
                 krpano.set("hotspot[" + previewName + "].onloaded",
                     "js: caller.sprite.classList.add('thumbnail-preview');");
 
-                // Clear manual hover events from the original hotspot since tooltip manages it
+                // Remove manual hover events (let tooltip handle it)
                 krpano.set("hotspot[" + hotspot.name + "].onhover", "");
                 krpano.set("hotspot[" + hotspot.name + "].onout", "");
             }
@@ -765,15 +755,8 @@
     }
 ]]></action>
 
-
 	<action scope="local" name="addimage" args ="test">
-	
-		 
 		tween(hotspot[get(test)].alpha, 1);
-		
-		
-		
-		
 	  </action>
 	  <action scope="local" name="removeimage" args="test">
 		tween(hotspot[get(test)].alpha, 0);
@@ -783,31 +766,16 @@
 		caller.sprite.style[ args[1] ] = args[2];
 		caller.sprite.style[ args[3] ] = args[4];
 	  </action>
-
-	  
-
 	<!-- Variables: Spotname, DegreeMapping -->
 	  <action name="scene_hotspot_mapping">
 		degree = view.hlookat + %0;
 		p = get(degree) + "," + get(view.vlookat) + ",120.0";
-		
-		<!-- trace(get(p));
-		trace("Old Scene link ",hotspot[%1].linkedscene_lookat); -->
 		set(hotspot[%1].linkedscene_lookat, get(p));
 		tween(view.distortion, 0.3);
 		trace(view.distortion);
-
-		trace("new Link ",hotspot[%1].linkedscene_lookat);
-		<!-- tween(view.fov, 90, tween(easeinoutcubic, 2)); -->
-
-		<!-- looktohotspot(spot1, 80,tween(easeinoutcubic, 1) ); -->
-		<!-- set(view. hlookat, get(a)); -->
-
-		<!-- trace(view.distortion="0.35" hlookat); -->
-		
-		
+		trace("new Link ",hotspot[%1].linkedscene_lookat);	
 	</action>
-<events onnewscene="rebuild_thumbnails();" />
+<events onnewscene="delayedcall(2, rebuild_thumbnails());" />
 
 <action name="rebuild_thumbnails" type="Javascript"><![CDATA[
     // Remove all existing preview hotspots first

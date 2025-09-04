@@ -405,7 +405,6 @@
 			renderer="css3d"
 			cssclass="imageHotspot"
 			onloaded="set_css_style('border','4px solidrgba(255, 255, 255, 0.9)' ,'border-radius', '100%','padding','16px' );" 
-	        tooltip=""
 	        linkedscene=""
 	        linkedscene_lookat=""
 	        linkedscene_hoffset="0"
@@ -417,23 +416,21 @@
 		   
 	       />
 	<style name="defaultHotspot" 
-		url="circle hotspot.svg" 
-		edge="top" 
-		distorted="false"
-		zoom="false"
-		tooltip="true"
-		linkedscene=""
-		linkedscene_lookat=""
-		linkedscene_hoffset="0"
-		use3dtransition="true"
-		onclick="skin_hotspotstyle_click();"
-		depth="1000"
-		scalex="0.6"
-		flying="0.0"
-		renderer="css3d"
-		cssclass="tester"
-		tooltipstyle="custom_tooltip_style"
-		onloaded.addevent="skin_hotspotstyle_setup();"
+			url="circle hotspot.svg" 
+			edge="top" 
+			distorted="false"
+			zoom="false"
+			linkedscene=""
+			linkedscene_lookat=""
+			linkedscene_hoffset="0"
+			use3dtransition="true"
+			onclick="skin_hotspotstyle_click();"
+			depth="1000"
+			scalex="0.6"
+			flying="0.0"
+			renderer="css3d"
+			cssclass="tester"
+			onloaded.addevent="skin_hotspotstyle_setup();"
 		/>
 		<style name="infoHotspot" url="hotspot.png" edge="top" distorted="false"
 			renderer="css3d"
@@ -622,14 +619,7 @@
 					scale="0.5"
 					onclick="toggle_voice();" />
 				</layer>
-				<layer name="sceneInfoButton"
-				style="gallDetails|skin_base|skin_glow"
-				crop="64|128|64|64"
-				align="right"
-				x="20"
-				y="0"
-				scale="0.5"
-				 onclick="js(showgallDetails(get(scene[get(xml.scene)].title), true));" />
+				<layer name="sceneInfoButton" style="gallDetails|skin_base|skin_glow" crop="64|128|64|64" align="right" x="20" y="0" scale="0.5" onclick="js(showgallDetails(get(scene[get(xml.scene)].title), true));" />
 				<layer name="skin_btn_gyro" style="skin_base|skin_glow" crop="0|384|64|64"  scale="0.5" onclick="switch(plugin[skin_gyro].enabled); if(plugin[skin_gyro].enabled, skin_showmap(false));" visible="false" />
 				<layer name="skin_btn_vr" style="skin_base|skin_glow" crop="0|0|80|64"    scale="0.5" onclick="webvr.enterVR();" visible="false" />
 				</layer>
