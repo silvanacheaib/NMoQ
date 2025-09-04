@@ -250,7 +250,7 @@ function showgallDetails(id, forceOpen = false) {
 
 // When the user closes manually, set the flag
 $(".galleryInfo .close").on("click", function () {
-    $(".galleryDetails").removeClass("active");
+    $(".galleryDetails").removeClass("active").removeClass("moveCenter");
     $(".galleryInfo").fadeOut();
     galleryInfoClosed = true;
 });

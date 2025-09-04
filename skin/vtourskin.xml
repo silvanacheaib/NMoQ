@@ -1629,56 +1629,68 @@
 			removelayer('iphone_fullscreen_info');
 		);
 	</action>
-	<!-- SOUND INTERFACE SCRIPTS  START -->
-	<action name="playaudio">
-		stopsound(voice);                         <!-- stop any previous scene's audio -->
-		set(layer[sound_toggle_btn].crop, 64|128|64|64);  <!-- pause icon -->
-		set(soundfile, get(scene[get(xml.scene)].soundurl));
-		if(soundfile !== null AND soundfile != '',
-			trace('Playing: ' + get(soundfile));
-			playsound(voice, get(soundfile), true, on_voice_finished());
-			set(voice_playing, true);
-		,
-			trace('No sound file found for this scene');
-			set(voice_playing, false);
-			set(layer[sound_toggle_btn].crop, 0|128|64|64);  <!-- play icon -->
-		);
-	</action>
-	<action name="toggle_voice">
-		if(voice_playing === null,
-			call(playaudio());
-		,
-			if(voice_playing === true,
-				pausesound(voice);
-				set(voice_playing, false);
-				set(layer[sound_toggle_btn].crop, 0|128|64|64);  <!-- play icon -->
-			,
-				resumesound(voice);
-				set(voice_playing, true);
-				set(layer[sound_toggle_btn].crop, 64|128|64|64); <!-- pause icon -->
-			);
-		);
-	</action>
-	<action name="on_voice_finished">
-		set(voice_playing, false);
-		set(layer[sound_toggle_btn].crop, 0|128|64|64);  <!-- play icon -->
-	</action>
-	<action name="on_voice_finished">
-		set(voice_playing, false);
-		set(layer[sound_toggle_btn].crop, 0|128|64|64);
-		set(layer[skin_btn_toggle_voice].crop, 0|640|64|64);
-		set(scene[get(xml.scene)].soundfinished, true);
-	</action>
-	<action name="playaudio_if_not_finished">
-			set( isfinished, get(scene[ get(xml.scene) ].soundfinished) );
-			if( introdone == true AND isfinished == false ,
+<!-- SOUND INTERFACE SCRIPTS START -->
+<action name="init_sound_flags" autorun="onstart">
+    if(user_paused === null, set(user_paused, false););  <!-- global flag -->
+    if(voice_playing === null, set(voice_playing, false););
+</action>
+<!-- Play audio for current scene -->
+<action name="playaudio">
+    trace("Checking audio for scene: " + get(xml.scene));
+    <!-- Do not play if user paused -->
+    if(user_paused === true,
+        trace("User paused audio, skipping auto-play for this scene.");
+        exit();
+    );
 
-				playaudio();
-				,
-				pausesound(voice);
-				
-			);
-	</action>
-	<!-- SOUND INTERFACE SCRIPTS  END -->
+    <!-- Get the sound file for the current scene -->
+    set(soundfile, get(scene[get(xml.scene)].soundurl));
+
+    if(soundfile !== null AND soundfile != '',
+        trace("Playing sound: " + get(soundfile));
+        stopsound(voice);                    <!-- Stop any previous scene audio -->
+        playsound(voice, get(soundfile), true, on_voice_finished());
+        set(voice_playing, true);
+        set(layer[sound_toggle_btn].crop, 64|128|64|64); <!-- pause icon -->
+    ,
+        trace("No sound file found for this scene");
+        set(voice_playing, false);
+        set(layer[sound_toggle_btn].crop, 0|128|64|64); <!-- play icon -->
+    );
+</action>
+
+<!-- Toggle voice on user click -->
+<action name="toggle_voice">
+    if(voice_playing === true,
+        pausesound(voice);
+        set(voice_playing, false);
+        set(user_paused, true);  <!-- remember user paused -->
+        trace("User paused audio manually.");
+        set(layer[sound_toggle_btn].crop, 0|128|64|64); <!-- play icon -->
+    ,
+        resumesound(voice);
+        set(voice_playing, true);
+        set(user_paused, false); <!-- user wants playing -->
+        trace("User resumed audio manually.");
+        set(layer[sound_toggle_btn].crop, 64|128|64|64); <!-- pause icon -->
+    );
+</action>
+
+<!-- When voice finishes naturally -->
+<action name="on_voice_finished">
+    trace("Audio finished naturally for scene: " + get(xml.scene));
+    set(voice_playing, false);
+    set(layer[sound_toggle_btn].crop, 0|128|64|64); <!-- play icon -->
+    set(scene[get(xml.scene)].soundfinished, true);
+    <!-- Do NOT reset user_paused here, only reset if you want autoplay after finishing -->
+</action>
+
+<!-- Optional: Reset user pause manually if needed -->
+<action name="reset_user_pause">
+    set(user_paused, false);
+    trace("User pause reset manually, audio can autoplay now.");
+</action>
+
+<!-- SOUND INTERFACE SCRIPTS END -->
 
 </krpano>
