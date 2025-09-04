@@ -42,12 +42,11 @@ html, body{
 .galleryInfo.modal.moveCenter {
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%)!important;
     height:40%;
     width: 40%;
     overflow:auto;
-    border-radius:1.5rem;
-    
+    border-radius: 1.5rem!important;
 }
 .galleryInfo.modal.moveCenter .modal-body .galleryDescription{
     display: block!important;
