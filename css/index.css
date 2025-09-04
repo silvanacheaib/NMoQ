@@ -25,6 +25,7 @@ html, body{
     opacity:0;
     transform:translateX(-100%);
     border-radius:0!important;
+    z-index: 2;
 }
 .galleryInfo.modal[style="display: block;"]{
     animation:1s fadeLeft .3s forwards;
@@ -778,7 +779,7 @@ header .navbar .menu-btn {
     display: none;
     justify-content: center;
     cursor: pointer;
-    z-index: 21;
+    z-index: 1001;
     transition: all 0.3s ease 0s;
     animation: 0.5s ease 0s 1 normal none running close-btn-reveal;
 }
@@ -827,7 +828,7 @@ header .navbar .menu-btn {
     height: 100vh;
     position: fixed;
     width: 100%;
-    z-index: 91;
+    z-index: 1000;
     overflow: hidden;
     opacity: 1;
     flex-direction: column;
@@ -1226,15 +1227,6 @@ header .navbar .lang a {
     left: 0px;
     display: none;
 }
-.menu .rights {
-    font-size: 0.8rem;
-    position: absolute;
-    align-items: flex-end;
-    left: 530px;
-    bottom: 22px;
-    display: none;
-    height: fit-content;
-}
 .nav-zone .navbar-col {
     padding: 0px 15px;
     height: 100%;
@@ -1410,6 +1402,9 @@ iframe{
     }
 }
 @media(min-width:992px){
+        .nav-zone {
+        width: 80%;
+    }
         .search-popup form {
         width: 35rem;
     }

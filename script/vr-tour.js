@@ -572,16 +572,7 @@ function closeVTPopup() {
     $('.vtpopup').fadeOut();
     $('.overlay').fadeOut();
 }
-//
-function openDTPopup() {
-    $('.galleryInfo').fadeIn();
-    $('.overlay').fadeIn();
-}
 
-function closeDTPopup() {
-    $('.galleryInfo').fadeOut();
-    $('.overlay').fadeOut();
-}
 function toggleMapContainer() {
     $('.map-container').fadeToggle();
 }
