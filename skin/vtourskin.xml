@@ -1637,9 +1637,13 @@
 <!-- Play audio for current scene -->
 <action name="playaudio">
     trace("Checking audio for scene: " + get(xml.scene));
-    <!-- Do not play if user paused -->
+    
+    <!-- Check if user has paused audio globally -->
     if(user_paused === true,
-        trace("User paused audio, skipping auto-play for this scene.");
+        trace("User paused audio globally, skipping auto-play for all scenes.");
+        set(voice_playing, false);
+        set(layer[sound_toggle_btn].crop, 0|128|64|64); <!-- play icon -->
+        set(layer[sound_toggle_btn].alpha, 0.5); <!-- visual muted indicator -->
         exit();
     );
 
@@ -1648,31 +1652,46 @@
 
     if(soundfile !== null AND soundfile != '',
         trace("Playing sound: " + get(soundfile));
-        stopsound(voice);                    <!-- Stop any previous scene audio -->
+        stopsound(voice);
         playsound(voice, get(soundfile), true, on_voice_finished());
         set(voice_playing, true);
         set(layer[sound_toggle_btn].crop, 64|128|64|64); <!-- pause icon -->
+        set(layer[sound_toggle_btn].alpha, 1.0); <!-- normal state -->
     ,
         trace("No sound file found for this scene");
         set(voice_playing, false);
         set(layer[sound_toggle_btn].crop, 0|128|64|64); <!-- play icon -->
+        set(layer[sound_toggle_btn].alpha, 1.0); <!-- normal state -->
     );
 </action>
 
 <!-- Toggle voice on user click -->
 <action name="toggle_voice">
     if(voice_playing === true,
+        <!-- Pause audio -->
         pausesound(voice);
         set(voice_playing, false);
-        set(user_paused, true);  <!-- remember user paused -->
+        set(user_paused, true);
         trace("User paused audio manually.");
         set(layer[sound_toggle_btn].crop, 0|128|64|64); <!-- play icon -->
+        set(layer[sound_toggle_btn].alpha, 0.5); <!-- visual muted indicator -->
     ,
-        resumesound(voice);
-        set(voice_playing, true);
-        set(user_paused, false); <!-- user wants playing -->
-        trace("User resumed audio manually.");
-        set(layer[sound_toggle_btn].crop, 64|128|64|64); <!-- pause icon -->
+        <!-- Unmute audio - need to handle two cases -->
+        if(scene[get(xml.scene)].soundurl !== null AND scene[get(xml.scene)].soundurl != '',
+            <!-- Case 1: Current scene has audio - play it from beginning -->
+            trace("User unmuted - playing current scene audio: " + get(scene[get(xml.scene)].soundurl));
+            stopsound(voice);
+            playsound(voice, get(scene[get(xml.scene)].soundurl), true, on_voice_finished());
+            set(voice_playing, true);
+            set(layer[sound_toggle_btn].crop, 64|128|64|64); <!-- pause icon -->
+        ,
+            <!-- Case 2: Current scene has no audio - just reset flags -->
+            trace("User unmuted but current scene has no audio");
+            set(voice_playing, false);
+            set(user_paused, false);
+            set(layer[sound_toggle_btn].crop, 0|128|64|64); <!-- play icon -->
+        );
+        set(layer[sound_toggle_btn].alpha, 1.0); <!-- remove muted indicator -->
     );
 </action>
 
