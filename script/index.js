@@ -41,12 +41,29 @@
 //   // If leaving a pane → maybe hide
 //   $panes.on("mouseleave", scheduleHide);
 // });
-$(".info.btnIcon").mouseover(function(){
-  $(".informationContainer.info").addClass("visibleItem");
-})
-$(".info.btnIcon").mouseleave(function(){
-  $(".informationContainer.info").removeClass("visibleItem");
-})
+$(document).ready(function () {
+  $(".info.btnIcon").on("mouseenter", function () {
+    $(".informationContainer").removeClass("visibleItem");
+    $("#info1").addClass("visibleItem");
+    $(this).addClass("active");
+  });
+  $(".btnIcon").on("mouseleave", function () {
+    $(".informationContainer").removeClass("visibleItem");
+    $("#info1,#info2,#info3").removeClass("visibleItem");
+    $(this).removeClass("active");
+  });
+  $(".safariIcon.btnIcon").on("mouseenter", function () {
+    $(".informationContainer").removeClass("visibleItem");
+    $("#info2").addClass("visibleItem");
+    $(this).addClass("active");
+  });
+  $(".replay.btnIcon").on("mouseenter", function () {
+    $(".informationContainer").removeClass("visibleItem");
+    $("#info3").addClass("visibleItem");
+    $(this).addClass("active");
+  });
+});
+
 $("button.startTour").click(function () {
   $("html").addClass("hideNavbar");
   $(".informationContainer").fadeOut();

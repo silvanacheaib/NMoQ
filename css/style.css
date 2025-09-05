@@ -803,6 +803,7 @@ img.tutorial{
 .thumbsStyle div>div>div:first-child{
 transform: translateZ(0px) translate(0px, 37.2px) translate(0px, 0px)!important;
 }
+
 @media(min-width:992px){
   .navContainer1{
     display:flex;

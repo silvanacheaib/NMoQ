@@ -5,6 +5,7 @@
 html, body{
     user-select: none;
     background-color: black;
+    overflow-x: hidden;
 }
 .zoomOutBeforeFade {
   transform: scale(1);
@@ -1109,6 +1110,7 @@ header .navbar .lang a {
     }
 }
 .informationContainer.visibleItem{
+    display: block;
     animation:1s ZoomInFade forwards;
 }
 .informationContainer .info{
