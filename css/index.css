@@ -980,7 +980,7 @@ header .navbar .lang a {
     transition: all .3s ease-in-out;
     z-index: 5!important;
 }
-.heroSection .videoContainer .videoCardOverlay button.active{
+.heroSection .videoContainer .videoCardOverlay button:hover{
     background-color:var(--gold);
     height: 3.5rem;
     width: 3.5rem;

@@ -217,7 +217,7 @@ function showgallDetails(id, forceOpen = false) {
 
     // If user closed it, don't auto-open unless forced
     if (galleryInfoClosed && !forceOpen) {
-        $(".galleryDetails").removeClass("active");
+        $(".galleryDetails").removeClass("active").removeClass("moveCenter");
         return;
     }
 
