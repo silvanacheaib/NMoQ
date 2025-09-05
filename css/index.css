@@ -978,7 +978,7 @@ header .navbar .lang a {
     backdrop-filter: blur(14px);
     border: 1px solid rgb(255 255 255 / 20%);
     transition: all .3s ease-in-out;
-    z-index: 5;
+    z-index: 5!important;
 }
 .heroSection .videoContainer .videoCardOverlay button.active{
     background-color:var(--gold);
