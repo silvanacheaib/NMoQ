@@ -2,6 +2,12 @@
     --gold:#A68C3F;
     --transition:all .3s ease-in-out;
 }
+.info.btnIcon:hover ~ #info1,
+.safariIcon.btnIcon:hover ~ #info2,
+.replay.btnIcon:hover ~ #info3 {
+  display: block;
+  animation:1s ZoomInFade forwards;
+}
 html, body{
     user-select: none;
     background-color: black;
@@ -972,7 +978,7 @@ header .navbar .lang a {
     backdrop-filter: blur(14px);
     border: 1px solid rgb(255 255 255 / 20%);
     transition: all .3s ease-in-out;
-    z-index: 1;
+    z-index: 5;
 }
 .heroSection .videoContainer .videoCardOverlay button.active{
     background-color:var(--gold);
