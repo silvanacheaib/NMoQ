@@ -1,57 +1,52 @@
-$(function () {
-  const $buttons = $("button.btnIcon");
-  const $panes   = $(".informationContainer");
-  let hideTimer = null;
+// $(function () {
+//   const $buttons = $("button.btnIcon");
+//   const $panes   = $(".informationContainer");
+//   let hideTimer = null;
 
-  function showPane($btn) {
-    const target = $btn.data("target"); // e.g. "#info1"
-    $buttons.removeClass("active");
-    $btn.addClass("active");
+//   function showPane($btn) {
+//     const target = $btn.data("target"); // e.g. "#info1"
+//     $buttons.removeClass("active");
+//     $btn.addClass("active");
 
-    $panes.stop(true, true).hide().removeClass("visibleItem");
-    if (target) $(target).stop(true, true).show().addClass("visibleItem");
-  }
+//     $panes.stop(true, true).hide().removeClass("visibleItem");
+//     if (target) $(target).stop(true, true).show().addClass("visibleItem");
+//   }
+//   function hideAll() {
+//     $buttons.removeClass("active");
+//     $panes.stop(true, true).hide().removeClass("visibleItem");
+//   }
+//   function scheduleHide() {
+//     if (hideTimer) clearTimeout(hideTimer);
+//     hideTimer = setTimeout(() => {
+//       // if mouse is *completely outside* both buttons & panes
+//       if (!$buttons.is(":hover") && !$panes.is(":hover")) {
+//         hideAll();
+//       }
+//     }, 200); // slightly longer delay feels smoother
+//   }
+//   // Show when hovering a button
+//   $buttons.on("mouseenter", function () {
+//     if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+//     showPane($(this));
+//   });
 
-  function hideAll() {
-    $buttons.removeClass("active");
-    $panes.stop(true, true).hide().removeClass("visibleItem");
-  }
+//   // If leaving a button → maybe hide
+//   $buttons.on("mouseleave", scheduleHide);
 
-  function scheduleHide() {
-    if (hideTimer) clearTimeout(hideTimer);
-    hideTimer = setTimeout(() => {
-      // if mouse is *completely outside* both buttons & panes
-      if (!$buttons.is(":hover") && !$panes.is(":hover")) {
-        hideAll();
-      }
-    }, 200); // slightly longer delay feels smoother
-  }
+//   // If entering a pane → cancel hide
+//   $panes.on("mouseenter", function () {
+//     if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
+//   });
 
-  // Show when hovering a button
-  $buttons.on("mouseenter", function () {
-    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
-    showPane($(this));
-  });
-
-  // If leaving a button → maybe hide
-  $buttons.on("mouseleave", scheduleHide);
-
-  // If entering a pane → cancel hide
-  $panes.on("mouseenter", function () {
-    if (hideTimer) { clearTimeout(hideTimer); hideTimer = null; }
-  });
-
-  // If leaving a pane → maybe hide
-  $panes.on("mouseleave", scheduleHide);
-});
-
-
-
-
-
-
-
-
+//   // If leaving a pane → maybe hide
+//   $panes.on("mouseleave", scheduleHide);
+// });
+$(".info.btnIcon").mouseover(function(){
+  $(".informationContainer.info").addClass("visibleItem");
+})
+$(".info.btnIcon").mouseleave(function(){
+  $(".informationContainer.info").removeClass("visibleItem");
+})
 $("button.startTour").click(function () {
   $("html").addClass("hideNavbar");
   $(".informationContainer").fadeOut();
