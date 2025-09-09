@@ -1468,40 +1468,19 @@
 	
 	
 	<!-- autotour/autoplay support -->
-	<autorotate enabled="false"
-	            waittime="5.0"
-	            accel="0.7"
-	            speed="4.0"
-	            oneroundrange="360"
-	            />
-	
-	<events name="skin_autotour" keep="true"
-		onautorotatestart="if(skin_settings.autotour, skin_autotour_start(); );"
-		onautorotatestop="if(skin_settings.autotour, skin_autotour_stop(); );"
-		onautorotateoneround="if(skin_settings.autotour, skin_nextscene_loop(+1); );"
-		  onloadcomplete="delayedcall(1, start_autorotate_delayed());"
-		/>
-	
-	<action name="skin_autotour_start" scope="PRIVATE:skin_autotour">
-		copy(loadscene_flags_backup, global.skin_settings.loadscene_flags);
-		set(global.skin_settings.loadscene_flags, MERGE|KEEPVIEW|KEEPMOVING|PRELOAD);
-		copy(loadscene_blend_next_backup, global.skin_settings.loadscene_blend_next);
-		set(global.skin_settings.loadscene_blend_next, SLIDEBLEND(2.0, 0, 0.75, linear) );
-	</action>
-	
-	<action name="skin_autotour_stop" scope="PRIVATE:skin_autotour">
-		copy(global.skin_settings.loadscene_flags, loadscene_flags_backup);
-		copy(global.skin_settings.loadscene_blend_next, loadscene_blend_next_backup);
-	</action>
-	<action name="start_autorotate_delayed">
-		set(autorotate.enabled, true);
-		startautorotate();
-	</action>
-	<events name="skin_autotour_extra" keep="true"
-        onautorotatestart="if(skin_settings.autotour, skin_autotour_start() );"
-        onautorotatestop="if(skin_settings.autotour, skin_autotour_stop() );"
-        onautorotateoneround="if(skin_settings.autotour, skin_nextscene_loop(+1) );"
-	/>
+<!-- autotour/autoplay support --> 
+<autorotate 
+enabled="calc:skin_settings.autotour == true" 
+waittime="5.0" 
+accel="0.7" 
+speed="4.0" 
+oneroundrange="360" /> 
+<events 
+name="skin_autotour" 
+keep="true" 
+onautorotatestart="if(skin_settings.autotour, skin_autotour_start(); );" 
+onautorotatestop="if(skin_settings.autotour, skin_autotour_stop(); );" 
+onautorotateoneround="if(skin_settings.autotour, skin_nextscene_loop(+1); );" /> <action name="skin_autotour_start" scope="PRIVATE:skin_autotour"> copy(loadscene_flags_backup, global.skin_settings.loadscene_flags); set(global.skin_settings.loadscene_flags, MERGE|KEEPVIEW|KEEPMOVING|PRELOAD); copy(loadscene_blend_next_backup, global.skin_settings.loadscene_blend_next); set(global.skin_settings.loadscene_blend_next, SLIDEBLEND(2.0, 0, 0.75, linear) ); </action> <action name="skin_autotour_stop" scope="PRIVATE:skin_autotour"> copy(global.skin_settings.loadscene_flags, loadscene_flags_backup); copy(global.skin_settings.loadscene_blend_next, loadscene_blend_next_backup); </action>
 	<!-- context menu - https://krpano.com/docu/xml/#contextmenu -->
 	<contextmenu fullscreen="true" versioninfo="true">
 		<item name="kr" caption="KRPANO" />

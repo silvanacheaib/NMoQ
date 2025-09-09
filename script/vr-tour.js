@@ -1,5 +1,6 @@
 //ARRAYS 
-const artifactsInfos = [
+// POPUP CONTENT
+const popupData = [
     {
         id: "RPN.2018.0001",
         title: "Devonian Fish: 400 million years old fossil",
@@ -192,9 +193,8 @@ function startTour() {
     }
     krpanoInterface.call("playaudio();");
 }
-// PLAY AUDIO ON SCENE LOAD END
-function artifactsInfosPopup(id) {
-    const entry = artifactsInfos.find(item => item.id === id);
+function showPopupById(id) {
+    const entry = popupData.find(item => item.id === id);
     if (!entry) return;
 
     $(".left-section h4").text(entry.title);
@@ -202,8 +202,7 @@ function artifactsInfosPopup(id) {
     $(".right-section img").attr("src", entry.image);
     $(".vtpopup").fadeIn().addClass("animateItems");
 }
-// GALLERY INFORMATIONS POPUP START
-let galleryInfoClosed = false;
+let galleryInfoClosed = false; // global flag
 function showgallDetails(id, forceOpen = false) {
      $(".galleryDetails").addClass("active");
     // detect language from URL
@@ -254,6 +253,7 @@ function showgallDetails(id, forceOpen = false) {
 
     $(".galleryInfo").fadeIn();
 }
+// When the user clicks the close button inside .galleryInfo
 $(".galleryInfo").on("click", ".close", function () {
     const $modal = $(this).closest(".galleryInfo");
 
@@ -264,6 +264,7 @@ $(".galleryInfo").on("click", ".close", function () {
     $(".galleryDetails").removeClass("active");
     galleryInfoClosed = true;
 });
+
 $(".infoHotspot").click(function(){
      const $modal = $(this).closest(".galleryInfo");
 
@@ -274,7 +275,7 @@ $(".infoHotspot").click(function(){
     $(".galleryDetails").removeClass("active");
     galleryInfoClosed = true;
 })
-// GALLERY INFORMATIONS POPUP END
+
 $(document).ready(function () {
     // Debug SVG load status
     const checkSvg = setInterval(() => {
@@ -290,7 +291,12 @@ $(document).ready(function () {
         xml: "./tour.xml",
         target: "pano",
         onready: function (krpano) {
+     
+
+            // ✅ Save globally
             krpanoInterface = krpano;
+
+            initializeSceneHandling();
             setTimeout(() => {
               
                 UpdateActiveRoomFromScene('intro');
@@ -304,10 +310,22 @@ $(document).ready(function () {
 // =============================================
 let currentGallery = null;
 let showingImageIndex = 1;
+function initializeSceneHandling() {
+    // Set up krpano event listeners
+    const krpano = document.getElementById("krpanoSWFObject");
+    if (krpano && krpano.set) {
+        krpano.set("events.onnewscene", "js(handleSceneChange(get(xml.scene)));");
+    }
+
+    // Initialize hotspot attributes
+    waitForKrpano(injectLinkedSceneAttribute);
+}
+
 function handleSceneChange(sceneName) {
     // console.log(`[SCENE] Changed to: ${sceneName}`);
     UpdateActiveRoomFromScene(sceneName);
 }
+
 function getGalleryByScene(sceneName) {
     const normalizedScene = sceneName.trim();
     console.log(`[LOOKUP] Finding gallery for scene: "${normalizedScene}"`);
@@ -322,6 +340,7 @@ function getGalleryByScene(sceneName) {
     console.warn(`[WARNING] No gallery found for scene: "${normalizedScene}"`);
     return null;
 }
+
 function UpdateActiveRoomFromScene(sceneName) {
     console.group(`[UPDATE] Room update for scene: ${sceneName}`);
 
@@ -335,7 +354,7 @@ function UpdateActiveRoomFromScene(sceneName) {
         transitionMapImage(galleries[galleryName].image);
 
         // Update customThumb class
-        //updateCustomThumbClass(galleryName);
+        updateCustomThumbClass(galleryName);
     }
 
     // Update room highlighting
@@ -343,6 +362,27 @@ function UpdateActiveRoomFromScene(sceneName) {
 
     console.groupEnd();
 }
+
+function updateCustomThumbClass(galleryName) {
+    const customThumb = document.querySelector('.customThumb');
+    if (!customThumb) {
+        console.warn('[WARNING] customThumb element not found');
+        return;
+    }
+
+    // Remove all existing gallery classes
+    const galleryClasses = Object.keys(galleries).map(g => `gallery${g.replace('Gallery', '')}`);
+    customThumb.classList.remove(...galleryClasses);
+
+    // Add new gallery class if valid
+    if (galleryName) {
+        const galleryNumber = galleryName.replace('Gallery', '');
+        const newClass = `gallery${galleryNumber}`;
+        customThumb.classList.add(newClass);
+        console.log(`[CUSTOMTHUMB] Added class: ${newClass}`);
+    }
+}
+
 function transitionMapImage(newSrc) {
     console.log(`[IMAGE] Transitioning to: ${newSrc}`);
 
@@ -360,6 +400,74 @@ function transitionMapImage(newSrc) {
     currentImg.classList.remove('visible');
     showingImageIndex = nextImgIndex;
 }
+
+function highlightActiveRoom(sceneName) {
+    console.log(`[HIGHLIGHT] Updating active room for: ${sceneName}`);
+
+    // Clear previous active rooms
+    document.querySelectorAll('.mapContainerPopup svg g.Room').forEach(room => {
+        room.classList.remove('active', 'clicked');
+    });
+
+    // Find and highlight new active room
+    const galleryName = getGalleryByScene(sceneName);
+    if (galleryName && galleries[galleryName]) {
+        const roomId = galleries[galleryName].id;
+        // Simplified selector - remove .mapContainerPopup if not needed
+        const roomSelector = `#${roomId}`;
+        const roomElement = document.querySelector(roomSelector);
+
+        if (roomElement) {
+            roomElement.classList.add('active', 'clicked');
+            console.log(`[SUCCESS] Highlighted room: ${roomId}`);
+            centerActiveRoom();
+        } else {
+            console.error(`[ERROR] Room element not found with selector: ${roomSelector}`);
+            // Debug: Log all room elements to see what's available
+            console.log('Available room elements:', document.querySelectorAll('.Room'));
+        }
+    } else {
+        console.warn(`[WARNING] No gallery configuration for scene: ${sceneName}`);
+    }
+}
+
+function centerActiveRoom() {
+    const container = document.querySelector('.map-container');
+    const svg = document.getElementById('svg-map');
+    const activeRoom = svg?.querySelector('.Room.active');
+
+    if (!activeRoom || !svg || !container) {
+        console.error("[ERROR] Elements missing for centering");
+        return;
+    }
+
+    // Calculate container and room dimensions
+    const containerRect = container.getBoundingClientRect();
+    const viewBox = svg.getAttribute('viewBox').split(' ').map(Number);
+    const roomBox = activeRoom.getBBox();
+    const scale = 2.3;
+
+    // Calculate room center
+    const roomCenterX = roomBox.x + roomBox.width / 2;
+    const roomCenterY = roomBox.y + roomBox.height / 2;
+
+    // Calculate translation
+    let translateX = containerRect.width / 2 - roomCenterX * scale;
+    let translateY = containerRect.height / 2 - roomCenterY * scale;
+
+    // Apply constraints
+    const minTranslateX = containerRect.width - viewBox[2] * scale;
+    const minTranslateY = containerRect.height - viewBox[3] * scale;
+    translateX = Math.min(Math.max(translateX, minTranslateX), 0);
+    translateY = Math.min(Math.max(translateY, minTranslateY), 0);
+
+    // Apply transformation
+    svg.style.transformOrigin = '0 0';
+    svg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+    // console.log(`[CENTER] Centered room with scale: ${scale}`);
+}
+
 // =============================================
 // KRPANO INTEGRATION
 // =============================================
@@ -372,6 +480,30 @@ function waitForKrpano(callback) {
         }
     }, 100);
 }
+
+function injectLinkedSceneAttribute() {
+    const krpano = document.getElementById("krpanoSWFObject");
+    if (!krpano || !krpano.get) return;
+
+    const count = parseInt(krpano.get("hotspot.count"), 10);
+    for (let i = 0; i < count; i++) {
+        const hsName = krpano.get(`hotspot[${i}].name`);
+        const hsDiv = krpano.get(`hotspot[${hsName}].div`);
+        if (!hsDiv) continue;
+
+        const linkedScene = krpano.get(`hotspot[${hsName}].linkedscene`);
+        if (linkedScene && !hsDiv.hasAttribute("data-linkedscene")) {
+            hsDiv.setAttribute("data-linkedscene", linkedScene);
+            hsDiv.setAttribute("title", linkedScene);
+        }
+    }
+
+    // console.log("[KRPANO] Injected linked scene attributes to hotspots");
+}
+
+// =============================================
+// UI FUNCTIONS
+// =============================================
 function openVTPopup() {
     $('.vtpopup').fadeIn();
     $('.overlay').fadeIn();
@@ -385,6 +517,7 @@ function closeVTPopup() {
 function toggleMapContainer() {
     $('.map-container').fadeToggle();
 }
+
 // UI Event Bindings
 $(document).on("click", ".closePopup", closeVTPopup);
 $(document).on("click", ".overlay", closeVTPopup);
