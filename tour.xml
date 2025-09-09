@@ -71,6 +71,7 @@
 	               />
 
 
+	
 	<scene name="intro" nextscene="Gallery1" title="Intro" onstart="actioner();add_next_scene_thumb_hotspot();handle_audio();" soundurl=""  thumburl="panos/38_1_Pano_Entrance_Reconstructed.tiles/thumb.jpg">
 		<control bouncinglimits="calc:image.cube ? true : false" />
 

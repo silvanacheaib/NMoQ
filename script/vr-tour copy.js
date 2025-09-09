@@ -1,5 +1,77 @@
-//ARRAYS 
-const artifactsInfos = [
+// PLAY AUDIO ON SCENE LOAD START 
+// function startTour() {
+//     if (!krpanoInterface) {
+//         console.warn("krpano not ready yet!");
+//         return;
+//     }
+//     krpanoInterface.call("playaudio();");
+// }
+// PLAY AUDIO ON SCENE LOAD END    
+// TUTORIAL SYSTEM (Dynamic for multiple elements)
+// function showTutorial() {
+//     const thumbs = document.querySelectorAll('.customThumb');
+//     const hotspots = document.querySelectorAll('.imageHotspot');
+
+//     // Build tutorial steps for thumbs
+//     const steps = Array.from(thumbs).map((thumb, index) => ({
+//         element: thumb,
+//         intro: `
+//             <div style="text-align: center;">
+//                 <img class="tutorial" src="../images/tutorial.gif" width="200" />
+//                 <h5 class="tutorialTitle" style="margin-bottom: 0.5rem;">Galleries Preview ${index + 1}</h5>
+//                 <p class="tutorialText" style="margin-bottom: 1rem;">
+//                     Engage and explore as you uncover the rich history of Qatar, interact with immersive exhibits.
+//                 </p>
+//             </div>
+//         `,
+//         position: 'bottom'
+//     }));
+
+//     // Build tutorial steps for hotspots
+//     hotspots.forEach((hotspot, index) => {
+//         steps.push({
+//             element: hotspot,
+//             intro: `
+//                 <div style="text-align: center;">
+//                     <img class="tutorial" src="../images/hotspot.gif" width="200" />
+//                     <h5 class="tutorialTitle" style="margin-bottom: 0.5rem;">Interactive Hotspot ${index + 1}</h5>
+//                     <p class="tutorialText" style="margin-bottom: 1rem;">
+//                         Tap on hotspots to reveal deeper insights and hidden stories.
+//                     </p>
+//                 </div>
+//             `,
+//             position: 'top'
+//         });
+//     });
+
+//     if (!steps.length) return; // No elements found
+
+//     introJs().setOptions({
+//         steps,
+//         showButtons: true,
+//         nextLabel: 'Next',
+//         doneLabel: 'Close'
+//     }).start();
+// }
+// function waitForElements(selector, callback) {
+//     const elements = document.querySelectorAll(selector);
+//     if (elements.length) {
+//         callback();
+//         return;
+//     }
+
+//     const observer = new MutationObserver(() => {
+//         const elements = document.querySelectorAll(selector);
+//         if (elements.length) {
+//             observer.disconnect();
+//             callback();
+//         }
+//     });
+
+//     observer.observe(document.body, { childList: true, subtree: true });
+// }
+// POPUP CONTENT
+const popupData = [
     {
         id: "RPN.2018.0001",
         title: "Devonian Fish: 400 million years old fossil",
@@ -68,6 +140,15 @@ const artifactsInfos = [
         image: "../images/items/wale shark.png"
     }
 ];
+function showPopupById(id) {
+    const entry = popupData.find(item => item.id === id);
+    if (!entry) return;
+
+    $(".left-section h4").text(entry.title);
+    $(".left-section .description").text(entry.description);
+    $(".right-section img").attr("src", entry.image);
+    $(".vtpopup").fadeIn().addClass("animateItems");
+}
 const GalleryDesctiption =[
     {
         id:`intro`,
@@ -122,6 +203,133 @@ const GalleryDesctiption =[
         relations, as well as water and plant resources that supported their way of life.`
     }
 ]
+let galleryInfoClosed = false; // global flag
+
+function showgallDetails(id, forceOpen = false) {
+     $(".galleryDetails").addClass("active");
+    // detect language from URL
+    const url = window.location.href;
+    let lang = "en"; // default
+    if (url.includes("/ar")) {
+        lang = "ar";
+    }
+
+    // find entry
+    const entry = GalleryDesctiption.find(item => item.id.toLowerCase() === id.toLowerCase());
+
+    if (!entry) {
+        $(".galleryInfo").fadeOut();
+        $(".galleryDetails").removeClass("active");
+        return;
+    }
+
+    // If user closed it, don't auto-open unless forced
+    if (galleryInfoClosed && !forceOpen) {
+        $(".galleryDetails").removeClass("active").removeClass("moveCenter");
+        return;
+    }
+
+    // If opened via button, reset closed state
+    if (forceOpen) {
+        galleryInfoClosed = false;
+    }
+
+    // pick the correct language fields
+    const title = lang === "ar" ? (entry.arabic_gallery_title || entry.english_gallery_title)
+                                : entry.english_gallery_title;
+    const description = lang === "ar" ? (entry.arabic_gallery_description || entry.english_gallery_description)
+                                      : entry.english_gallery_description;
+
+    // update UI
+    $(".modal-header .galleryTitle").text(title);
+    $(".modal-body .galleryDescription").text(description);
+
+    // set text direction for Arabic
+    if (lang === "ar") {
+        $(".modal-body .galleryDescription").attr("dir", "rtl");
+        $(".modal-header .galleryTitle").attr("dir", "rtl");
+    } else {
+        $(".modal-body .galleryDescription").attr("dir", "ltr");
+        $(".modal-header .galleryTitle").attr("dir", "ltr");
+    }
+
+    $(".galleryInfo").fadeIn();
+}
+// When the user clicks the close button inside .galleryInfo
+$(".galleryInfo").on("click", ".close", function () {
+    const $modal = $(this).closest(".galleryInfo");
+
+    $modal.removeClass("active").fadeOut(400, function () {
+        // this callback runs after fadeOut is complete
+        $modal.removeClass("moveCenter");
+    });
+    $(".galleryDetails").removeClass("active");
+    galleryInfoClosed = true;
+});
+
+$(".infoHotspot").click(function(){
+     const $modal = $(this).closest(".galleryInfo");
+
+    $modal.removeClass("active").fadeOut(400, function () {
+        // this callback runs after fadeOut is complete
+        $modal.removeClass("moveCenter");
+    });
+    $(".galleryDetails").removeClass("active");
+    galleryInfoClosed = true;
+})
+
+
+$(document).ready(function () {
+    // Debug SVG load status
+    const checkSvg = setInterval(() => {
+        const svg = document.querySelector('#svg-map');
+        if (svg) {
+            clearInterval(checkSvg);
+            console.log("[SVG] Found in DOM, rooms:",
+                Array.from(document.querySelectorAll('.Room')).map(r => r.id));
+        }
+    }, 100);
+
+    embedpano({
+        xml: "./tour.xml",
+        target: "pano",
+        onready: function (krpano) {
+     
+
+            // ✅ Save globally
+            krpanoInterface = krpano;
+
+            // initializeSceneHandling();
+            setTimeout(() => {
+              
+                UpdateActiveRoomFromScene('intro');
+            }, 1000);
+        }
+    });
+
+});
+
+// $(document).ready(function() {
+//     // Initialize the panorama viewer
+//     embedpano({
+//         xml: "./tour.xml",
+//         target: "pano"
+//     }, function() {
+//         // Wait for custom thumb element before showing tutorial
+//         // waitForElement('.customThumb', showTutorial);
+
+//         // Initialize scene handling system
+//         initializeSceneHandling();
+
+//         // Debug: Test room highlighting (can be removed in production)
+//         console.log("[INIT] Virtual Tour initialized");
+//         UpdateActiveRoomFromScene('Gallery1'); // Test R1 highlighting
+//     });
+// });
+
+// =============================================
+// GALLERIES CONFIGURATION
+// =============================================
 const galleries = {
         'intro': {
         id: 'R8-1',
@@ -184,130 +392,28 @@ const galleries = {
         image: '../images/floormaps/G11.png'
     }
 };
-// PLAY AUDIO ON SCENE LOAD START 
-function startTour() {
-    if (!krpanoInterface) {
-        console.warn("krpano not ready yet!");
-        return;
-    }
-    krpanoInterface.call("playaudio();");
-}
-// PLAY AUDIO ON SCENE LOAD END
-function artifactsInfosPopup(id) {
-    const entry = artifactsInfos.find(item => item.id === id);
-    if (!entry) return;
-
-    $(".left-section h4").text(entry.title);
-    $(".left-section .description").text(entry.description);
-    $(".right-section img").attr("src", entry.image);
-    $(".vtpopup").fadeIn().addClass("animateItems");
-}
-// GALLERY INFORMATIONS POPUP START
-let galleryInfoClosed = false;
-function showgallDetails(id, forceOpen = false) {
-     $(".galleryDetails").addClass("active");
-    // detect language from URL
-    const url = window.location.href;
-    let lang = "en"; // default
-    if (url.includes("/ar")) {
-        lang = "ar";
-    }
-
-    // find entry
-    const entry = GalleryDesctiption.find(item => item.id.toLowerCase() === id.toLowerCase());
-
-    if (!entry) {
-        $(".galleryInfo").fadeOut();
-        $(".galleryDetails").removeClass("active");
-        return;
-    }
-
-    // If user closed it, don't auto-open unless forced
-    if (galleryInfoClosed && !forceOpen) {
-        $(".galleryDetails").removeClass("active").removeClass("moveCenter");
-        return;
-    }
-
-    // If opened via button, reset closed state
-    if (forceOpen) {
-        galleryInfoClosed = false;
-    }
-
-    // pick the correct language fields
-    const title = lang === "ar" ? (entry.arabic_gallery_title || entry.english_gallery_title)
-                                : entry.english_gallery_title;
-    const description = lang === "ar" ? (entry.arabic_gallery_description || entry.english_gallery_description)
-                                      : entry.english_gallery_description;
-
-    // update UI
-    $(".modal-header .galleryTitle").text(title);
-    $(".modal-body .galleryDescription").text(description);
-
-    // set text direction for Arabic
-    if (lang === "ar") {
-        $(".modal-body .galleryDescription").attr("dir", "rtl");
-        $(".modal-header .galleryTitle").attr("dir", "rtl");
-    } else {
-        $(".modal-body .galleryDescription").attr("dir", "ltr");
-        $(".modal-header .galleryTitle").attr("dir", "ltr");
-    }
-
-    $(".galleryInfo").fadeIn();
-}
-$(".galleryInfo").on("click", ".close", function () {
-    const $modal = $(this).closest(".galleryInfo");
-
-    $modal.removeClass("active").fadeOut(400, function () {
-        // this callback runs after fadeOut is complete
-        $modal.removeClass("moveCenter");
-    });
-    $(".galleryDetails").removeClass("active");
-    galleryInfoClosed = true;
-});
-$(".infoHotspot").click(function(){
-     const $modal = $(this).closest(".galleryInfo");
-
-    $modal.removeClass("active").fadeOut(400, function () {
-        // this callback runs after fadeOut is complete
-        $modal.removeClass("moveCenter");
-    });
-    $(".galleryDetails").removeClass("active");
-    galleryInfoClosed = true;
-})
-// GALLERY INFORMATIONS POPUP END
-$(document).ready(function () {
-    // Debug SVG load status
-    const checkSvg = setInterval(() => {
-        const svg = document.querySelector('#svg-map');
-        if (svg) {
-            clearInterval(checkSvg);
-            console.log("[SVG] Found in DOM, rooms:",
-                Array.from(document.querySelectorAll('.Room')).map(r => r.id));
-        }
-    }, 100);
-
-    embedpano({
-        xml: "./tour.xml",
-        target: "pano",
-        onready: function (krpano) {
-            krpanoInterface = krpano;
-            setTimeout(() => {
-              
-                UpdateActiveRoomFromScene('intro');
-            }, 1000);
-        }
-    });
-
-});
 // =============================================
 // CORE FUNCTIONALITY
 // =============================================
 let currentGallery = null;
 let showingImageIndex = 1;
+
+// function initializeSceneHandling() {
+//     // Set up krpano event listeners
+//     const krpano = document.getElementById("krpanoSWFObject");
+//     if (krpano && krpano.set) {
+//         krpano.set("events.onnewscene", "js(handleSceneChange(get(xml.scene)));");
+//     }
+
+//     // Initialize hotspot attributes
+//     waitForKrpano(injectLinkedSceneAttribute);
+// }
+
 function handleSceneChange(sceneName) {
     // console.log(`[SCENE] Changed to: ${sceneName}`);
     UpdateActiveRoomFromScene(sceneName);
 }
+
 function getGalleryByScene(sceneName) {
     const normalizedScene = sceneName.trim();
     console.log(`[LOOKUP] Finding gallery for scene: "${normalizedScene}"`);
@@ -322,6 +428,7 @@ function getGalleryByScene(sceneName) {
     console.warn(`[WARNING] No gallery found for scene: "${normalizedScene}"`);
     return null;
 }
+
 function UpdateActiveRoomFromScene(sceneName) {
     console.group(`[UPDATE] Room update for scene: ${sceneName}`);
 
@@ -343,6 +450,27 @@ function UpdateActiveRoomFromScene(sceneName) {
 
     console.groupEnd();
 }
+
+// function updateCustomThumbClass(galleryName) {
+//     const customThumb = document.querySelector('.customThumb');
+//     if (!customThumb) {
+//         console.warn('[WARNING] customThumb element not found');
+//         return;
+//     }
+
+//     // Remove all existing gallery classes
+//     const galleryClasses = Object.keys(galleries).map(g => `gallery${g.replace('Gallery', '')}`);
+//     customThumb.classList.remove(...galleryClasses);
+
+//     // Add new gallery class if valid
+//     if (galleryName) {
+//         const galleryNumber = galleryName.replace('Gallery', '');
+//         const newClass = `gallery${galleryNumber}`;
+//         customThumb.classList.add(newClass);
+//         console.log(`[CUSTOMTHUMB] Added class: ${newClass}`);
+//     }
+// }
+
 function transitionMapImage(newSrc) {
     console.log(`[IMAGE] Transitioning to: ${newSrc}`);
 
@@ -360,6 +488,74 @@ function transitionMapImage(newSrc) {
     currentImg.classList.remove('visible');
     showingImageIndex = nextImgIndex;
 }
+
+// function highlightActiveRoom(sceneName) {
+//     console.log(`[HIGHLIGHT] Updating active room for: ${sceneName}`);
+
+//     // Clear previous active rooms
+//     document.querySelectorAll('.mapContainerPopup svg g.Room').forEach(room => {
+//         room.classList.remove('active', 'clicked');
+//     });
+
+//     // Find and highlight new active room
+//     const galleryName = getGalleryByScene(sceneName);
+//     if (galleryName && galleries[galleryName]) {
+//         const roomId = galleries[galleryName].id;
+//         // Simplified selector - remove .mapContainerPopup if not needed
+//         const roomSelector = `#${roomId}`;
+//         const roomElement = document.querySelector(roomSelector);
+
+//         if (roomElement) {
+//             roomElement.classList.add('active', 'clicked');
+//             console.log(`[SUCCESS] Highlighted room: ${roomId}`);
+//             centerActiveRoom();
+//         } else {
+//             console.error(`[ERROR] Room element not found with selector: ${roomSelector}`);
+//             // Debug: Log all room elements to see what's available
+//             console.log('Available room elements:', document.querySelectorAll('.Room'));
+//         }
+//     } else {
+//         console.warn(`[WARNING] No gallery configuration for scene: ${sceneName}`);
+//     }
+// }
+
+// function centerActiveRoom() {
+//     const container = document.querySelector('.map-container');
+//     const svg = document.getElementById('svg-map');
+//     const activeRoom = svg?.querySelector('.Room.active');
+
+//     if (!activeRoom || !svg || !container) {
+//         console.error("[ERROR] Elements missing for centering");
+//         return;
+//     }
+
+//     // Calculate container and room dimensions
+//     const containerRect = container.getBoundingClientRect();
+//     const viewBox = svg.getAttribute('viewBox').split(' ').map(Number);
+//     const roomBox = activeRoom.getBBox();
+//     const scale = 2.3;
+
+//     // Calculate room center
+//     const roomCenterX = roomBox.x + roomBox.width / 2;
+//     const roomCenterY = roomBox.y + roomBox.height / 2;
+
+//     // Calculate translation
+//     let translateX = containerRect.width / 2 - roomCenterX * scale;
+//     let translateY = containerRect.height / 2 - roomCenterY * scale;
+
+//     // Apply constraints
+//     const minTranslateX = containerRect.width - viewBox[2] * scale;
+//     const minTranslateY = containerRect.height - viewBox[3] * scale;
+//     translateX = Math.min(Math.max(translateX, minTranslateX), 0);
+//     translateY = Math.min(Math.max(translateY, minTranslateY), 0);
+
+//     // Apply transformation
+//     svg.style.transformOrigin = '0 0';
+//     svg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+//     console.log(`[CENTER] Centered room with scale: ${scale}`);
+// }
+
 // =============================================
 // KRPANO INTEGRATION
 // =============================================
@@ -372,6 +568,30 @@ function waitForKrpano(callback) {
         }
     }, 100);
 }
+
+// function injectLinkedSceneAttribute() {
+//     const krpano = document.getElementById("krpanoSWFObject");
+//     if (!krpano || !krpano.get) return;
+
+//     const count = parseInt(krpano.get("hotspot.count"), 10);
+//     for (let i = 0; i < count; i++) {
+//         const hsName = krpano.get(`hotspot[${i}].name`);
+//         const hsDiv = krpano.get(`hotspot[${hsName}].div`);
+//         if (!hsDiv) continue;
+
+//         const linkedScene = krpano.get(`hotspot[${hsName}].linkedscene`);
+//         if (linkedScene && !hsDiv.hasAttribute("data-linkedscene")) {
+//             hsDiv.setAttribute("data-linkedscene", linkedScene);
+//             hsDiv.setAttribute("title", linkedScene);
+//         }
+//     }
+
+//     console.log("[KRPANO] Injected linked scene attributes to hotspots");
+// }
+
+// =============================================
+// UI FUNCTIONS
+// =============================================
 function openVTPopup() {
     $('.vtpopup').fadeIn();
     $('.overlay').fadeIn();
@@ -385,6 +605,7 @@ function closeVTPopup() {
 function toggleMapContainer() {
     $('.map-container').fadeToggle();
 }
+
 // UI Event Bindings
 $(document).on("click", ".closePopup", closeVTPopup);
 $(document).on("click", ".overlay", closeVTPopup);
