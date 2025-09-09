@@ -610,14 +610,14 @@
 					<layer name="skin_btn_show" type="container" bgcapture="true" align="bottom" width="100%" height="get:skin_settings.controlbar_height" y="calc:skin_settings.controlbar_height - skin_settings.controlbar_offset_closed" onclick="skin_showskin()"   visible="false" capture="false">
 						<layer name="skin_btn_show_icon" style="skin_show_button_style|skin_base|skin_glow" crop="0|0|64|64"  scale="0.5"   enabled="false" />
 					</layer>
-					<layer name="sound_toggle_btn"
+					<!-- <layer name="sound_toggle_btn"
 					style="playSound|skin_base|skin_glow"
 					crop="64|128|64|64"
 					align="right"
 					x="20"
 					y="0"
 					scale="0.5"
-					onclick="toggle_voice();" />
+					onclick="toggle_voice();" /> -->
 				</layer>
 				<layer name="sceneInfoButton" style="gallDetails|skin_base|skin_glow" crop="64|128|64|64" align="right" x="20" y="0" scale="0.5" onclick="js(showgallDetails(get(scene[get(xml.scene)].title), true));" />
 				<layer name="skin_btn_gyro" style="skin_base|skin_glow" crop="0|384|64|64"  scale="0.5" onclick="switch(plugin[skin_gyro].enabled); if(plugin[skin_gyro].enabled, skin_showmap(false));" visible="false" />
@@ -1468,7 +1468,7 @@
 	
 	
 	<!-- autotour/autoplay support -->
-	<autorotate enabled="calc:skin_settings.autotour == true"
+	<autorotate enabled="false"
 	            waittime="5.0"
 	            accel="0.7"
 	            speed="4.0"
@@ -1479,6 +1479,7 @@
 		onautorotatestart="if(skin_settings.autotour, skin_autotour_start(); );"
 		onautorotatestop="if(skin_settings.autotour, skin_autotour_stop(); );"
 		onautorotateoneround="if(skin_settings.autotour, skin_nextscene_loop(+1); );"
+		  onloadcomplete="delayedcall(1, start_autorotate_delayed());"
 		/>
 	
 	<action name="skin_autotour_start" scope="PRIVATE:skin_autotour">
@@ -1492,8 +1493,15 @@
 		copy(global.skin_settings.loadscene_flags, loadscene_flags_backup);
 		copy(global.skin_settings.loadscene_blend_next, loadscene_blend_next_backup);
 	</action>
-
-
+	<action name="start_autorotate_delayed">
+		set(autorotate.enabled, true);
+		startautorotate();
+	</action>
+	<events name="skin_autotour_extra" keep="true"
+        onautorotatestart="if(skin_settings.autotour, skin_autotour_start() );"
+        onautorotatestop="if(skin_settings.autotour, skin_autotour_stop() );"
+        onautorotateoneround="if(skin_settings.autotour, skin_nextscene_loop(+1) );"
+	/>
 	<!-- context menu - https://krpano.com/docu/xml/#contextmenu -->
 	<contextmenu fullscreen="true" versioninfo="true">
 		<item name="kr" caption="KRPANO" />

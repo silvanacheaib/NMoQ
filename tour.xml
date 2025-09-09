@@ -71,7 +71,7 @@
 	               />
 
 
-	<scene name="intro" nextscene="Gallery1" title="Intro" onstart="actioner();add_next_scene_thumb_hotspot();handle_audio();" soundurl="sounds/tr1.mp3"  thumburl="panos/38_1_Pano_Entrance_Reconstructed.tiles/thumb.jpg">
+	<scene name="intro" nextscene="Gallery1" title="Intro" onstart="actioner();add_next_scene_thumb_hotspot();handle_audio();" soundurl=""  thumburl="panos/38_1_Pano_Entrance_Reconstructed.tiles/thumb.jpg">
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
 		<view hlookat="104.080" vlookat="3.561" fovtype="MFOV" fov="140.000" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
@@ -84,7 +84,7 @@
 		<hotspot name="spot1695555570"  type="image"  style="defaultHotspot" ath="114.623" atv="2.211" linkedscene="Gallery1"  linkedscene_lookat="81.0,8.43,144.26"></hotspot>
 		
 	</scene>
-	<scene name="Gallery1" nextscene="Gallery1-2" title="G1"  onstart="actioner();delayedcall(1, lookto(40.62, 17.25, 140, 4));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));add_next_scene_thumb_hotspot();)" soundurl="sounds/tr2.mp3" thumburl="panos/01_2_Pano_G1_Reconstructed_B2.tiles/thumb.jpg">
+	<scene name="Gallery1" nextscene="Gallery1-2" title="G1"  onstart="actioner();delayedcall(1, lookto(40.62, 17.25, 140, 4));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));add_next_scene_thumb_hotspot();)" soundurl="" thumburl="panos/01_2_Pano_G1_Reconstructed_B2.tiles/thumb.jpg">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -103,7 +103,7 @@
 		<hotspot name="spot1718828530" type="image" style="defaultHotspot" ath="-116.468" atv="12.481" linkedscene="intro" linkedscene_lookat="-58.5,-2.23,157.1" />
 	</scene>
 
-	<scene name="Gallery1-2" title="G1" thumburl="panos/02_1_Pano_G1_Reconstructed.tiles/thumb.jpg" onstart="actioner();delayedcall(1, lookto(-0.04,18.48,140,2));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)"  lat="" lng="" alt="" heading="" soundurl="sounds/welcome(1).mp3">
+	<scene name="Gallery1-2" title="G1" thumburl="panos/02_1_Pano_G1_Reconstructed.tiles/thumb.jpg" onstart="actioner();delayedcall(1, lookto(-0.04,18.48,140,2));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)"  lat="" lng="" alt="" heading="" soundurl="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -121,7 +121,7 @@
 
 	</scene>
 
-	<scene name="Gallery2" title="Gallery 2" onstart="actioner();delayedcall(1, lookto(365, 0, 400));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/03_1_Pano_G2_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="" soundurl="sounds/welcome(2).mp3">
+	<scene name="Gallery2" title="Gallery 2" onstart="actioner();delayedcall(1, lookto(365, 0, 400));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/03_1_Pano_G2_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="" soundurl="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 

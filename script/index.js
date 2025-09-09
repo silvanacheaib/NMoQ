@@ -52,7 +52,23 @@ setTimeout(function () {
     }, 0); // Optional delay after loading
   });
 });
+$(document).ready(function () {
+  var $buttons = $(".btnIcon");
+  var current = 0;
+  var interval = 5000; // 5 seconds
 
+  function cycleAnimation() {
+    $buttons.removeClass("animate");         // remove from all
+    $buttons.eq(current).addClass("animate"); // add to current
+    current = (current + 1) % $buttons.length; // loop
+  }
+
+  // run immediately
+  cycleAnimation();
+
+  // repeat every 5s
+  setInterval(cycleAnimation, interval);
+});
 function startLoading(callback) {
   var $percentage = $('.percentage');
   var $loadingText = $('.loadingText');

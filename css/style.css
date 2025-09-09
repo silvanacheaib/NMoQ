@@ -151,12 +151,19 @@
   font-size: 1rem;
   line-height:2.1;
   color: rgb(0 0 0 / 60%);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
   }
   .vtpopup .popup-body .right-section{
     width: 35%;
     height: 20rem;
     opacity: 0;
     transform: translateX(-100%);
+  }
+  .menu-btn{
+    margin-left: 1rem;
   }
 @keyframes fadeLeft{
   0%{
@@ -552,16 +559,6 @@ html.tourStarted .toolbarContainer > div{
   align-items:center;
   justify-content: center;
   width: 100vw!important;
-  /* opacity:0!important; */
-  /* transform:translateY(100%); */
-}
-html.tourStarted .navContainer{
-  /* opacity: 1!important; */
-  /* animation:1s fadeUp forwards; */
-}
-.customThumb{
-  /* opacity: 0!important; */
-  /* transform:translateY(100%); */
 }
 html[dir="ltr"] .customThumb{
   width: 10rem!important;
@@ -572,10 +569,6 @@ html[dir="ltr"] .customThumb{
   left: 1rem;
   right: auto;
   cursor: pointer;
-}
-html.tourStarted .customThumb{
-   /* opacity: 1!important; */
-   /* animation:1s fadeUp forwards; */
 }
 html .galleryDetails{
   background-image: url(../skin/defaultIcons/Info.png)!important;

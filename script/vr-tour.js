@@ -247,13 +247,29 @@ function showgallDetails(id, forceOpen = false) {
 
     $(".galleryInfo").fadeIn();
 }
+// When the user clicks the close button inside .galleryInfo
+$(".galleryInfo").on("click", ".close", function () {
+    const $modal = $(this).closest(".galleryInfo");
 
-// When the user closes manually, set the flag
-$(".galleryInfo .close").on("click", function () {
-    $(".galleryDetails").removeClass("active").removeClass("moveCenter");
-    $(".galleryInfo").fadeOut();
+    $modal.removeClass("active").fadeOut(400, function () {
+        // this callback runs after fadeOut is complete
+        $modal.removeClass("moveCenter");
+    });
+    $(".galleryDetails").removeClass("active");
     galleryInfoClosed = true;
 });
+
+$(".infoHotspot").click(function(){
+     const $modal = $(this).closest(".galleryInfo");
+
+    $modal.removeClass("active").fadeOut(400, function () {
+        // this callback runs after fadeOut is complete
+        $modal.removeClass("moveCenter");
+    });
+    $(".galleryDetails").removeClass("active");
+    galleryInfoClosed = true;
+})
+
 
 $(document).ready(function () {
     // Debug SVG load status
