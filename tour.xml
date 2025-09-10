@@ -94,8 +94,8 @@
 
 		<hotspot name="hotspot1"  type="image" style="defaultHotspot"  ath="107.586" atv="5.047" depth="1000.0" linkedscene="gallery2" linkedscene_lookat="151.47,21.62,175.76" />
 		<hotspot name="hotspotSameRoom"  type="image" style="defaultHotspot" ath="81.643" atv="10.467" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" />
-		<hotspot name="fossil_skeleton"  style="infoHotspot"  ath="40.176" atv="3.994"  depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('QM.2018.0147'))"/>
-		<hotspot name="spot1718195525"  style="infoHotspot" ath="-30.726" atv="5.383" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('RPN.2018.0001'))"/>
+		<hotspot name="fossil_skeleton"  style="infoHotspot"  ath="40.176" atv="3.994"  depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('G1', 'QM.2018.0147');)"/>
+		<hotspot name="spot1718195525"  style="infoHotspot" ath="-30.726" atv="5.383" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('G1','RPN.2018.0001'))"/>
 		<hotspot name="spot1718828530" type="image" style="defaultHotspot" ath="-116.468" atv="12.481" linkedscene="intro" linkedscene_lookat="-58.5,-2.23,157.1" />
 	</scene>
 
@@ -112,29 +112,22 @@
 		</image>
 
 		<hotspot name="spot1718045400" style="defaultHotspot" ath="174.185" atv="21.936" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1" linkedscene_lookat="79.32,7.2,155.11" />
-		<hotspot name="desert_rose" style="infoHotspot" ath="-117.422" atv="20.698" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('QNM.2013.88.98'))"/>
-		<hotspot name="fossil_skeleton" style="infoHotspot" ath="-85.849" atv="7.628" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('QM.2018.0147'))"/>
+		<hotspot name="desert_rose" style="infoHotspot" ath="-117.422" atv="20.698" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('G1','QNM.2013.88.98'))"/>
+		<hotspot name="fossil_skeleton" style="infoHotspot" ath="-85.849" atv="7.628" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('G1','QM.2018.0147'))"/>
 
 	</scene>
 
-	<scene name="Gallery2" title="Gallery 2" onstart="actioner();delayedcall(1, lookto(365, 0, 400));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/03_1_Pano_G2_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="" soundurl="">
-		
+	<scene name="Gallery2" title="Gallery 2" onstart="actioner(); lookat(120,0,140); delayedcall(1.5, lookto(365, 2, 400));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/03_1_Pano_G2_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="" soundurl="">
 		<control bouncinglimits="calc:image.cube ? true : false" />
-
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
-
 		<preview url="panos/03_1_Pano_G2_Reconstructed_B2.tiles/preview.jpg" />
-
 		<image>
 			<cube url="panos/03_1_Pano_G2_Reconstructed_B2.tiles/%s/l%l/%v/l%l_%s_%v_%h.jpg" multires="512,1024,2048,4096" />
 		</image>
-
 		<hotspot name="spot1695547675" style="defaultHotspot" ath="46.830" atv="9.767" depth="1000.0" linkedscene="gallery2-2" linkedscene_lookat="-74.15,0.64,170.21" />
 		<hotspot name="spot1695547887" style="defaultHotspot" ath="-15.799" atv="7.074" depth="1000.0" linkedscene="Gallery1" linkedscene_lookat="-97.54,15.59,155.11" />
 		<hotspot name="spot1695548074" style="defaultHotspot" ath="-56.738" atv="5.982" depth="1000.0" linkedscene="Gallery2-1" linkedscene_lookat="-7.27,5.45,162.68" />
-		<hotspot name="Wale_Shark" style="infoHotspot" ath="7.622" atv="-21.247" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery2-1" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('RPN.2018.0355'))"/>
-		<hotspot name="spot1" style="skin_hotspotstyle" ath="287.586" atv="5.047" distorted="false" zoom="false" linkedscene="gallery1" linkedscene_lookat="151.47,21.62,175.76" linkedscene_hoffset="0.0" use3dtransition="true" />
-
+		<hotspot name="Wale_Shark" style="infoHotspot" ath="7.622" atv="-21.247" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery2-1" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('G2','RPN.2018.0355'))"/>
 	</scene>
 
 	<scene name="Gallery2-1" title="Gallery 2" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/04_1_Pano_G2_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">

@@ -1,25 +1,76 @@
 //ARRAYS 
 // POPUP CONTENT
 const popupData = [
+
+
+];
+const galleries = [
     {
-        id: "RPN.2018.0001",
-        title: "Devonian Fish: 400 million years old fossil",
-        description: `This specimen is a portion of a placoderm fish fossil 
-        encountered at a depth of 12, 560 feet(around 3, 828 meters) in core 35 of well DK- 0065, 
-        which was spudded on July 20, 1958. This fossil, identified as Qataraspis deprofundis, 
-        dates to the lower or middle Devonian period, approximately 400 million years ago.
-        It represents the right anterior - lateral plate of the fish.The species was named Qataraspis 
-        deprofundis to reflect both its discovery in Qatar and the significant depth at which it was found.
-        This fossil, which has been loaned from the Natural History Museum in London, is considered a new 
-        genus and species in science.It provides valuable insights into Devonian marine life and aids in 
-        understanding the geological history of the strata in which it was found.A replica of the fish’s 
-        armor plate offers an idea of its shape.`,
-        image: `../images/items/Devonian Fish.png`
+        id: 'intro',
+        english_gallery_title: '',
+        arabic_gallery_title: '',
+        english_gallery_description: '',
+        arabic_gallery_description: '',
+        scenes: ['intro'],
+        image: './images/floormaps/entry.png'
     },
     {
-        id: "QNM.2015.8",
-        title: "Crocodile Skull",
-        description: `The fossil crocodylian skull, found in 2005 in southwest Qatar just east of the Salwa Road 
+        id: 'G1',
+        english_gallery_title: 'The formation of Qatar',
+        arabic_gallery_title: 'التكوين الجيلوجي لشه جزيرة قطر',
+        english_gallery_description: `This gallery showcases the geological and biological 
+        evolution of the Qatar Peninsula over the past 700 million years. 
+        It highlights the major geological changes that shaped the land, alongside 
+        reconstructions and fossils that bring to life the ancient environments and 
+        prehistoric animals that once inhabited the region.`,
+        arabic_gallery_description: `تستعرض هذه الصالة التطور الجيولوجي والبيولوجي لشبه جزيرة قطر على مدى 700 مليون سنة،
+         حيث تسلط الضوء على التغيرات الجيولوجية الكبرى التي شكّلت الأرض، إلى جانب عرض بيئات قديمة من خلال
+         حفريات ومجسمات تجسد الحيوانات التي عاشت في المنطقة في عصور ما قبل التاريخ.`,
+        scenes: ['Gallery1', 'Gallery1-2'],
+        image: '../images/floormaps/G1.png',
+        artifacts: [
+            {
+                id: "RPN.2018.0001",
+                title: "Devonian Fish: 400 million years old fossil",
+                description: `This specimen is a portion of a placoderm fish fossil 
+            encountered at a depth of 12, 560 feet(around 3, 828 meters) in core 35 of well DK- 0065, 
+            which was spudded on July 20, 1958. This fossil, identified as Qataraspis deprofundis, 
+            dates to the lower or middle Devonian period, approximately 400 million years ago.
+            It represents the right anterior - lateral plate of the fish.The species was named Qataraspis 
+            deprofundis to reflect both its discovery in Qatar and the significant depth at which it was found.
+            This fossil, which has been loaned from the Natural History Museum in London, is considered a new 
+            genus and species in science.It provides valuable insights into Devonian marine life and aids in 
+            understanding the geological history of the strata in which it was found.A replica of the fish’s 
+            armor plate offers an idea of its shape.`,
+                image: `../images/items/Devonian Fish.png`
+            },
+            {
+                id: "QM.2018.0147",
+                title: "fossil skeleton",
+                description: `Mounted skeleton of a dugongid, a marine mammal family that includes present-day sea cows. 
+        This specimen includes an almost complete set of ribs, various cervical, dorsal, and caudal vertebrae, 
+        along with fragments of limbs and the skull. It dates back to the early Miocene era and was discovered 
+        in the lower strata of the Dammam Formation in Qatar.`,
+                image: "../images/items/fossil skeleton.png"
+            },
+            {
+                id: "QNM.2013.88.98",
+                title: "Desert Rose",
+                description: `The Desert Rose is a cluster of gypsum or baryte crystals arranged in a rosette shape. 
+         These crystals form circular arrays of flat plates containing trapped sand particles giving it a shape 
+         similar to a rose blossom. Desert roses are formed through a long-term process involving gypsum formation 
+         below the surface of coastal or inland sabkhas. Due to extremely high evaporation rates, sabkha groundwater 
+         reaches salinity levels that exceed the concentration of seawater, causing gypsum, a calcium sulfate mineral, 
+         to precipitate and form desert roses. The color of the desert rose varies depending on the sediment incorporated 
+         into the crystal structure. Desert roses are a common geological phenomenon found in Qatar's coastal and inland 
+         sabkhas, particularly at Khor Al - Adaid and Dukhan.The complex form of the desert rose, inspired the striking 
+         design of the National Museum of Qatar`,
+                image: "../images/items/Desert rose.png"
+            },
+            {
+                id: "QNM.2015.8",
+                title: "Crocodile Skull",
+                description: `The fossil crocodylian skull, found in 2005 in southwest Qatar just east of the Salwa Road 
       near the Saudi border, The dorsal surface of the skull is exposed, and preservation renders many elements 
       cracked and weathered, yet sutures separating the bones are clear.
       The long, narrow snout is represented by premaxillae, maxillae and nasals but elements immediately anterior 
@@ -30,35 +81,27 @@ const popupData = [
       length and the post - rostrum represents 30 percent.The skull's features indicate the fossil species is 
       a tomistomine, closely resembling a number of European and African species from the same time period, 
       but with notable differences in proportions of elements and the shape of their sutural contacts.`,
-        image: "../images/items/Crocodile Skull.png"
+                image: "../images/items/Crocodile Skull.png"
+            },
+        ]
     },
     {
-        id: "QM.2018.0147",
-        title: "fossil skeleton",
-        description: `Mounted skeleton of a dugongid, a marine mammal family that includes present-day sea cows. 
-        This specimen includes an almost complete set of ribs, various cervical, dorsal, and caudal vertebrae, 
-        along with fragments of limbs and the skull. It dates back to the early Miocene era and was discovered 
-        in the lower strata of the Dammam Formation in Qatar.`,
-        image: "../images/items/fossil skeleton.png"
-    },
-    {
-        id: "QNM.2013.88.98",
-        title: "Desert Rose",
-        description: `The Desert Rose is a cluster of gypsum or baryte crystals arranged in a rosette shape. 
-         These crystals form circular arrays of flat plates containing trapped sand particles giving it a shape 
-         similar to a rose blossom. Desert roses are formed through a long-term process involving gypsum formation 
-         below the surface of coastal or inland sabkhas. Due to extremely high evaporation rates, sabkha groundwater 
-         reaches salinity levels that exceed the concentration of seawater, causing gypsum, a calcium sulfate mineral, 
-         to precipitate and form desert roses. The color of the desert rose varies depending on the sediment incorporated 
-         into the crystal structure. Desert roses are a common geological phenomenon found in Qatar's coastal and inland 
-         sabkhas, particularly at Khor Al - Adaid and Dukhan.The complex form of the desert rose, inspired the striking 
-         design of the National Museum of Qatar`,
-        image: "../images/items/Desert rose.png"
-    },
-    {
-        id: "RPN.2018.0355",
-        title: "Rhincodon typus",
-        description: `The whale shark, recognized for its large size, rounded head, and crescent - shaped tail fin, 
+        id: 'G2',
+        english_gallery_title: 'Qatar’s Natural Environments',
+        arabic_gallery_title: '',
+        english_gallery_description: `This gallery takes visitors on a journey to discover the natural 
+        history of Qatar, highlighting the country’s rich environmental diversity. It showcases 
+        a wide range of native wildlife, including terrestrial and marine animals, insects, and birds, 
+        while also exploring themes of conservation and the remarkable ways in which species adapt to 
+        their natural surroundings.`,
+        arabic_gallery_description: '',
+        scenes: ['Gallery2', 'Gallery2-1', 'Gallery2-2'],
+        image: '../images/floormaps/G2.png',
+        artifacts: [
+            {
+                id: "RPN.2018.0355",
+                title: "Rhincodon typus",
+                description: `The whale shark, recognized for its large size, rounded head, and crescent - shaped tail fin, 
             has a dark bluish - grey to brown dorsal side with unique light spots, while its underside is whitish.This 
             filter - feeder, with small, scale - like teeth, primarily lives in offshore waters but occasionally ventures 
             near shore, often accompanied by pelagic fish like tuna.Whale sharks undertake long migrations, returning to 
@@ -66,125 +109,101 @@ const popupData = [
             observed near the Al - Shaheen oil field each summer.A conservation initiative led by the Ministry of 
             Municipality and Environment and the Maersk Oil Research and Technology Centre utilizes offshore platforms as 
             artificial reefs to support these sharks.`,
-        image: "../images/items/wale shark.png"
-    }
-];
-const GalleryDesctiption =[
-    {
-        id:`intro`,
-        english_gallery_title: ``,
-        arabic_gallery_title:` `,
-        english_gallery_description:``,
-        arabic_gallery_description:`
-        `
+                image: "../images/items/wale shark.png"
+            }
+        ]
     },
     {
-        id:`G1`,
-        english_gallery_title: `The formation of Qatar`,
-        arabic_gallery_title:`التكوين الجيلوجي لشه جزيرة قطر`,
-        english_gallery_description:`This gallery showcases the geological and biological 
-        evolution of the Qatar Peninsula over the past 700 million years. 
-        It highlights the major geological changes that shaped the land, alongside 
-        reconstructions and fossils that bring to life the ancient environments and 
-        prehistoric animals that once inhabited the region..`,
-        arabic_gallery_description:`
-        تستعرض هذه الصالة التطور
-         الجيولوجي والبيولوجي لشبه جزيرة قطر على مدى 700 مليون سنة، حيث تسلط الضوء
-         على التغيرات الجيولوجية الكبرى التي شكّلت الأرض، إلى جانب عرض بيئات قديمة من خلال
-         حفريات ومجسمات تجسد الحيوانات التي عاشت في المنطقة في عصور ما قبل التاريخ.
-        `
-    },
-    {
-        id:`Gallery 2`,
-        english_gallery_title: `Qatar’s Natural Environments `,
-        english_gallery_description:`This gallery takes visitors on a journey to discover the natural 
-        history of Qatar, highlighting the country’s rich environmental diversity. It showcases 
-        a wide range of native wildlife, including terrestrial and marine animals, insects, and birds, 
-        while also exploring themes of conservation and the remarkable ways in which species adapt to 
-        their natural surroundings.`
-    },
-    {
-        id:`Gallery 3`,
-        english_gallery_title: `The Archaeology of Qatar`,
-        english_gallery_description:`This gallery presents the chronological story of the early inhabitants 
+        id: 'G3',
+        english_gallery_title: 'The Archaeology of Qatar',
+        arabic_gallery_title: '',
+        english_gallery_description: `This gallery presents the chronological story of the early inhabitants 
         of the Qatar Peninsula through archaeological artifacts and inscriptions. It highlights two of Qatar’s 
         most important archaeological sites, Al Khor and Murwab, showcased as detailed models brought to life 
         with projections illustrating the evolution of each site and the significance of their key discoveries. 
         Complementing this, a series of striking displays features core artifacts dating back over 10,000 years, 
         from stone tools and simple pottery to fine metal objects and exquisite ceramics, revealing the region’s 
-        rich cultural heritage and the development of its ancient communities.`
-    },
-    {
-        id:`Gallery 4`,
-        english_gallery_title: `The People of Qatar`,
-        english_gallery_description:`This gallery tells the story of Qatar’s people from the 18th century to the mid-20th 
-        century, highlighting how the dual land-and-sea environment shaped their identity, traditions, daily life, and creative 
-        skills. It explores key themes including land and sea navigation, transportation and animals, trade and international 
-        relations, as well as water and plant resources that supported their way of life.`
-    }
-]
-const galleries = {
-        'intro': {
-        id: 'R8-1',
-        scenes: ['intro'],
-        image: './images/floormaps/entry.png'
-    },
-    'Gallery1': {
-        id: 'R1',
-        scenes: ['Gallery1', 'Gallery1-2'],
-        image: '../images/floormaps/G1.png'
-    },
-    'Gallery2': {
-        id: 'R2',
-        scenes: ['Gallery2', 'Gallery2-1', 'Gallery2-2'],
-        image: '../images/floormaps/G2.png'
-    },
-    'Gallery3': {
-        id: 'R3',
+        rich cultural heritage and the development of its ancient communities.`,
+        arabic_gallery_description: '',
         scenes: ['Gallery3', 'Gallery3-1', 'Gallery3-2', 'Gallery3-3', 'Gallery3-4'],
         image: '../images/floormaps/G3.png'
     },
-    'Gallery4': {
-        id: 'R4',
+    {
+        id: 'G4',
+        english_gallery_title: 'The People of Qatar',
+        arabic_gallery_title: '',
+        english_gallery_description: `This gallery tells the story of Qatar’s people from the 18th century to the mid-20th 
+        century, highlighting how the dual land-and-sea environment shaped their identity, traditions, daily life, and creative 
+        skills. It explores key themes including land and sea navigation, transportation and animals, trade and international 
+        relations, as well as water and plant resources that supported their way of life.`,
+        arabic_gallery_description: '',
         scenes: ['Gallery4', 'Gallery4-1', 'Gallery4-2'],
         image: '../images/floormaps/G4.png'
     },
-    'Gallery5': {
-        id: 'R5',
+    {
+        id: 'G5',
+        english_gallery_title: '',
+        arabic_gallery_title: '',
+        english_gallery_description: '',
+        arabic_gallery_description: '',
         scenes: ['Gallery5', 'Gallery5-1', 'Gallery5-2', 'Gallery5-3'],
         image: '../images/floormaps/G5.png'
     },
-    'Gallery6': {
-        id: 'R6',
+    {
+        id: 'G6',
+        english_gallery_title: '',
+        arabic_gallery_title: '',
+        english_gallery_description: '',
+        arabic_gallery_description: '',
         scenes: ['Gallery6', 'Gallery6-1', 'Gallery6-2', 'Gallery6-3'],
         image: '../images/floormaps/G6.png'
     },
-    'Gallery7': {
-        id: 'R7',
+    {
+        id: 'G7',
+        english_gallery_title: '',
+        arabic_gallery_title: '',
+        english_gallery_description: '',
+        arabic_gallery_description: '',
         scenes: ['Gallery7', 'Gallery7-1', 'Gallery7-2', 'Gallery7-3'],
         image: '../images/floormaps/G7.png'
     },
-    'Gallery8': {
-        id: 'R8',
+    {
+        id: 'G8',
+        english_gallery_title: '',
+        arabic_gallery_title: '',
+        english_gallery_description: '',
+        arabic_gallery_description: '',
         scenes: ['Gallery8', 'Gallery8-1', 'Gallery8-2', 'Gallery8-3'],
         image: '../images/floormaps/G8.png'
     },
-    'Gallery9': {
-        id: 'R9',
+    {
+        id: 'G9',
+        english_gallery_title: '',
+        arabic_gallery_title: '',
+        english_gallery_description: '',
+        arabic_gallery_description: '',
         scenes: ['Gallery9', 'Gallery9-1', 'Gallery9-2', 'Gallery9-3'],
         image: '../images/floormaps/G9.png'
     },
-    'Gallery10': {
-        id: 'R10',
+    {
+        id: 'G10',
+        english_gallery_title: '',
+        arabic_gallery_title: '',
+        english_gallery_description: '',
+        arabic_gallery_description: '',
         scenes: ['Gallery10', 'Gallery10-1', 'Gallery10-2', 'Gallery10-3'],
         image: '../images/floormaps/G10.png'
     },
-    'Gallery11': {
-        id: 'R11',
+    {
+        id: 'G11',
+        english_gallery_title: '',
+        arabic_gallery_title: '',
+        english_gallery_description: '',
+        arabic_gallery_description: '',
         scenes: ['Gallery11'],
         image: '../images/floormaps/G11.png'
     }
-};
+];
 // PLAY AUDIO ON SCENE LOAD START 
 function startTour() {
     if (!krpanoInterface) {
@@ -193,170 +212,127 @@ function startTour() {
     }
     krpanoInterface.call("playaudio();");
 }
-function showPopupById(id) {
-    const entry = popupData.find(item => item.id === id);
-    if (!entry) return;
+// this function is responsible for displaying informations about artefacts for each gallery item
+function showPopupById(galleryId, artifactId = null) {
+    const gallery = galleries.find(item => item.id === galleryId);
+    if (!gallery || !gallery.artifacts || gallery.artifacts.length === 0) return;
 
-    $(".left-section h4").text(entry.title);
-    $(".left-section .description").text(entry.description);
-    $(".right-section img").attr("src", entry.image);
+    // If artifactId is provided, find that artifact, otherwise use the first one
+    const artifact = artifactId
+        ? gallery.artifacts.find(a => a.id === artifactId)
+        : gallery.artifacts[0];
+
+    if (!artifact) return;
+
+    $(".left-section h4").text(artifact.title);
+    $(".left-section .description").text(artifact.description);
+    $(".right-section img").attr("src", artifact.image);
     $(".vtpopup").fadeIn().addClass("animateItems");
 }
-let galleryInfoClosed = false; // global flag
+let galleryInfoClosed = false;
 function showgallDetails(id, forceOpen = false) {
-     $(".galleryDetails").addClass("active");
-    // detect language from URL
-    const url = window.location.href;
-    let lang = "en"; // default
-    if (url.includes("/ar")) {
-        lang = "ar";
-    }
+    $(".galleryDetails").addClass("active");
 
-    // find entry
-    const entry = GalleryDesctiption.find(item => item.id.toLowerCase() === id.toLowerCase());
-
+    const lang = window.location.href.includes("/ar") ? "ar" : "en";
+    const entry = galleries.find(item => item.id.toLowerCase() === id.toLowerCase());
     if (!entry) {
         $(".galleryInfo").fadeOut();
         $(".galleryDetails").removeClass("active");
         return;
     }
 
-    // If user closed it, don't auto-open unless forced
     if (galleryInfoClosed && !forceOpen) {
         $(".galleryDetails").removeClass("active").removeClass("moveCenter");
         return;
     }
-
-    // If opened via button, reset closed state
-    if (forceOpen) {
-        galleryInfoClosed = false;
-    }
-
-    // pick the correct language fields
+    if (forceOpen) galleryInfoClosed = false;
     const title = lang === "ar" ? (entry.arabic_gallery_title || entry.english_gallery_title)
-                                : entry.english_gallery_title;
+        : entry.english_gallery_title;
     const description = lang === "ar" ? (entry.arabic_gallery_description || entry.english_gallery_description)
-                                      : entry.english_gallery_description;
+        : entry.english_gallery_description;
 
-    // update UI
-    $(".modal-header .galleryTitle").text(title);
-    $(".modal-body .galleryDescription").text(description);
-
-    // set text direction for Arabic
-    if (lang === "ar") {
-        $(".modal-body .galleryDescription").attr("dir", "rtl");
-        $(".modal-header .galleryTitle").attr("dir", "rtl");
-    } else {
-        $(".modal-body .galleryDescription").attr("dir", "ltr");
-        $(".modal-header .galleryTitle").attr("dir", "ltr");
-    }
-
+    $(".modal-header .galleryTitle").text(title).attr("dir", lang === "ar" ? "rtl" : "ltr");
+    $(".modal-body .galleryDescription").text(description).attr("dir", lang === "ar" ? "rtl" : "ltr");
     $(".galleryInfo").fadeIn();
 }
-// When the user clicks the close button inside .galleryInfo
-$(".galleryInfo").on("click", ".close", function () {
-    const $modal = $(this).closest(".galleryInfo");
-
-    $modal.removeClass("active").fadeOut(400, function () {
-        // this callback runs after fadeOut is complete
-        $modal.removeClass("moveCenter");
-    });
-    $(".galleryDetails").removeClass("active");
-    galleryInfoClosed = true;
-});
-
-$(".infoHotspot").click(function(){
-     const $modal = $(this).closest(".galleryInfo");
-
-    $modal.removeClass("active").fadeOut(400, function () {
-        // this callback runs after fadeOut is complete
-        $modal.removeClass("moveCenter");
-    });
-    $(".galleryDetails").removeClass("active");
-    galleryInfoClosed = true;
-})
 function initGalleryNavigation() {
-  // Wait until krpanoInterface is ready
-  if (!window.krpanoInterface) {
-    console.warn("[GalleryNav] krpanoInterface not ready, retrying...");
-    setTimeout(initGalleryNavigation, 500);
-    return;
-  }
+    // Wait until krpanoInterface is ready
+    if (!window.krpanoInterface) {
+        console.warn("[GalleryNav] krpanoInterface not ready, retrying...");
+        setTimeout(initGalleryNavigation, 500);
+        return;
+    }
 
-  // Helper: update active state
-  function setActiveByScene(sceneName) {
-    let matchedGallery = null;
+    // Helper: update active state
+    function setActiveByScene(sceneName) {
+        let matchedGallery = null;
 
-    // find which gallery contains this scene
+        // find which gallery contains this scene
+        Object.keys(galleries).forEach(galleryName => {
+            const gallery = galleries[galleryName];
+            if (gallery.scenes.includes(sceneName)) {
+                matchedGallery = gallery;
+            }
+        });
+
+        if (matchedGallery) {
+            document.querySelectorAll('.Room').forEach(room => {
+                room.classList.remove('active');
+            });
+            const el = document.getElementById(matchedGallery.id);
+            if (el) el.classList.add('active');
+            if (matchedGallery && matchedGallery.image) {
+                transitionMapImage(matchedGallery.image);
+            }
+        }
+    }
+
+    // 1) Register click listeners for each gallery
     Object.keys(galleries).forEach(galleryName => {
-      const gallery = galleries[galleryName];
-      if (gallery.scenes.includes(sceneName)) {
-        matchedGallery = gallery;
-      }
+        const gallery = galleries[galleryName];
+        const el = document.getElementById(gallery.id);
+
+        if (el) {
+            // prevent duplicate listeners
+            el.replaceWith(el.cloneNode(true));
+            const newEl = document.getElementById(gallery.id);
+
+            newEl.addEventListener("click", () => {
+                const firstScene = gallery.scenes[0];
+                console.log(`[GalleryNav] Clicked ${gallery.id} → loadscene(${firstScene})`);
+
+                // Load scene in krpano
+                krpanoInterface.call(`loadscene(${firstScene}, null, MERGE, BLEND(1));`);
+
+                // Show gallery details popup
+                showgallDetails(galleryName, true);
+
+                // Update active state
+                setActiveByScene(firstScene);
+            });
+        } else {
+            console.warn(`[GalleryNav] Element not found for gallery ${galleryName} (id=${gallery.id})`);
+        }
     });
 
-    if (matchedGallery) {
-      document.querySelectorAll('.Room').forEach(room => {
-        room.classList.remove('active');
-      });
-      const el = document.getElementById(matchedGallery.id);
-      if (el) el.classList.add('active');
-      if (matchedGallery && matchedGallery.image) {
-        transitionMapImage(matchedGallery.image);
+    // 2) Hook into krpano event when scene changes
+    krpanoInterface.set("events[galleryNavEvents].onnewscene", "js(updateActiveFromKrpano());");
+
+    // Expose a global JS function that krpano can call
+    window.updateActiveFromKrpano = function () {
+        const currentScene = krpanoInterface.get("xml.scene");
+        console.log("[GalleryNav] Scene changed →", currentScene);
+        setActiveByScene(currentScene);
+    };
+
+    // 3) Initial check (highlight the current scene right away)
+    const initialScene = krpanoInterface.get("xml.scene");
+    if (initialScene) {
+        setActiveByScene(initialScene);
     }
-    }
-  }
-
-  // 1) Register click listeners for each gallery
-  Object.keys(galleries).forEach(galleryName => {
-    const gallery = galleries[galleryName];
-    const el = document.getElementById(gallery.id);
-
-    if (el) {
-      // prevent duplicate listeners
-      el.replaceWith(el.cloneNode(true));
-      const newEl = document.getElementById(gallery.id);
-
-      newEl.addEventListener("click", () => {
-        const firstScene = gallery.scenes[0];
-        console.log(`[GalleryNav] Clicked ${gallery.id} → loadscene(${firstScene})`);
-
-        // Load scene in krpano
-        krpanoInterface.call(`loadscene(${firstScene}, null, MERGE, BLEND(1));`);
-
-        // Show gallery details popup
-        showgallDetails(galleryName, true);
-
-        // Update active state
-        setActiveByScene(firstScene);
-      });
-    } else {
-      console.warn(`[GalleryNav] Element not found for gallery ${galleryName} (id=${gallery.id})`);
-    }
-  });
-
-  // 2) Hook into krpano event when scene changes
-  krpanoInterface.set("events[galleryNavEvents].onnewscene", "js(updateActiveFromKrpano());");
-
-  // Expose a global JS function that krpano can call
-  window.updateActiveFromKrpano = function () {
-    const currentScene = krpanoInterface.get("xml.scene");
-    console.log("[GalleryNav] Scene changed →", currentScene);
-    setActiveByScene(currentScene);
-  };
-
-  // 3) Initial check (highlight the current scene right away)
-  const initialScene = krpanoInterface.get("xml.scene");
-  if (initialScene) {
-    setActiveByScene(initialScene);
-  }
 }
-
-
-
-
 $(document).ready(function () {
-    $(".closemapContainer").click(function(){
+    $(".closemapContainer").click(function () {
         $(".mapContainerPopup").fadeOut();
     })
     // Debug SVG load status
@@ -373,26 +349,17 @@ $(document).ready(function () {
         xml: "./tour.xml",
         target: "pano",
         onready: function (krpano) {
-     
-
-            // ✅ Save globally
             krpanoInterface = krpano;
-
             initializeSceneHandling();
             initGalleryNavigation();
             setTimeout(() => {
-              
                 UpdateActiveRoomFromScene('intro');
             }, 1000);
         }
     });
 
 });
-// =============================================
-// CORE FUNCTIONALITY
-// =============================================
 let currentGallery = null;
-// let showingImageIndex = 1;
 function initializeSceneHandling() {
     // Set up krpano event listeners
     const krpano = document.getElementById("krpanoSWFObject");
@@ -403,12 +370,10 @@ function initializeSceneHandling() {
     // Initialize hotspot attributes
     waitForKrpano(injectLinkedSceneAttribute);
 }
-
 function handleSceneChange(sceneName) {
     // console.log(`[SCENE] Changed to: ${sceneName}`);
     UpdateActiveRoomFromScene(sceneName);
 }
-
 function getGalleryByScene(sceneName) {
     const normalizedScene = sceneName.trim();
     console.log(`[LOOKUP] Finding gallery for scene: "${normalizedScene}"`);
@@ -423,7 +388,6 @@ function getGalleryByScene(sceneName) {
     console.warn(`[WARNING] No gallery found for scene: "${normalizedScene}"`);
     return null;
 }
-
 function UpdateActiveRoomFromScene(sceneName) {
     console.group(`[UPDATE] Room update for scene: ${sceneName}`);
 
@@ -445,7 +409,6 @@ function UpdateActiveRoomFromScene(sceneName) {
 
     console.groupEnd();
 }
-
 function updateCustomThumbClass(galleryName) {
     const customThumb = document.querySelector('.customThumb');
     if (!customThumb) {
@@ -465,18 +428,9 @@ function updateCustomThumbClass(galleryName) {
         console.log(`[CUSTOMTHUMB] Added class: ${newClass}`);
     }
 }
-
-let showingImageIndex = 1; // start with #map-image-1 visible
-
-// FIXED: transitionMapImage function
+let showingImageIndex = 1;
 function transitionMapImage(newSrc) {
-    // If it's the same image, don't do anything
-    if (newSrc === currentImageSrc) {
-        return;
-    }
-    
     console.log(`[IMAGE] Transitioning to: ${newSrc}`);
-    currentImageSrc = newSrc;
 
     const currentImg = document.getElementById(`map-image-${showingImageIndex}`);
     const nextImgIndex = showingImageIndex === 1 ? 2 : 1;
@@ -496,8 +450,6 @@ function transitionMapImage(newSrc) {
 
     nextImg.src = newSrc;
 }
-
-
 function highlightActiveRoom(sceneName) {
     console.log(`[HIGHLIGHT] Updating active room for: ${sceneName}`);
 
@@ -527,7 +479,6 @@ function highlightActiveRoom(sceneName) {
         console.warn(`[WARNING] No gallery configuration for scene: ${sceneName}`);
     }
 }
-
 function centerActiveRoom() {
     const container = document.querySelector('.map-container');
     const svg = document.getElementById('svg-map');
@@ -564,10 +515,6 @@ function centerActiveRoom() {
 
     // console.log(`[CENTER] Centered room with scale: ${scale}`);
 }
-
-// =============================================
-// KRPANO INTEGRATION
-// =============================================
 function waitForKrpano(callback) {
     const interval = setInterval(() => {
         const krpano = document.getElementById("krpanoSWFObject");
@@ -577,7 +524,6 @@ function waitForKrpano(callback) {
         }
     }, 100);
 }
-
 function injectLinkedSceneAttribute() {
     const krpano = document.getElementById("krpanoSWFObject");
     if (!krpano || !krpano.get) return;
@@ -597,33 +543,22 @@ function injectLinkedSceneAttribute() {
 
     // console.log("[KRPANO] Injected linked scene attributes to hotspots");
 }
-
-// =============================================
-// UI FUNCTIONS
-// =============================================
 function openVTPopup() {
     $('.vtpopup').fadeIn();
     $('.overlay').fadeIn();
 }
-
 function closeVTPopup() {
     $('.vtpopup').fadeOut();
     $('.overlay').fadeOut();
 }
-
 function toggleMapContainer() {
     $('.map-container').fadeToggle();
 }
-
-// UI Event Bindings
 $(document).on("click", ".closePopup", closeVTPopup);
 $(document).on("click", ".overlay", closeVTPopup);
 $(document).on("click", ".fullScreenStyle", function () {
     $(this).toggleClass("active");
 });
-$(".galleryDetails").click(function(){
-    $(this).addClass("active");
-})
 $(document).on("click", ".navContainer2 .expandNavigation", function () {
     $(this).toggleClass("active");
     $(".navContainer2").toggleClass("active");
@@ -637,6 +572,29 @@ $(document).on("click", ".customThumb", function () {
 $(document).on("click", ".playSound", function () {
     $(this).toggleClass("active");
 });
-$('.galleryInfo .modal-footer button').click(function(){
+$(".infoHotspot").click(function () {
+    const $modal = $(this).closest(".galleryInfo");
+
+    $modal.removeClass("active").fadeOut(400, function () {
+        // this callback runs after fadeOut is complete
+        $modal.removeClass("moveCenter");
+    });
+    $(".galleryDetails").removeClass("active");
+    galleryInfoClosed = true;
+})
+$(".galleryInfo").on("click", ".close", function () {
+    const $modal = $(this).closest(".galleryInfo");
+
+    $modal.removeClass("active").fadeOut(400, function () {
+        // this callback runs after fadeOut is complete
+        $modal.removeClass("moveCenter");
+    });
+    $(".galleryDetails").removeClass("active");
+    galleryInfoClosed = true;
+});
+$(".galleryDetails").click(function () {
+    $(this).addClass("active");
+})
+$('.galleryInfo .modal-footer button').click(function () {
     $(".galleryInfo").addClass("moveCenter");
 })
