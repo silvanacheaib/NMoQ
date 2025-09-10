@@ -275,8 +275,90 @@ $(".infoHotspot").click(function(){
     $(".galleryDetails").removeClass("active");
     galleryInfoClosed = true;
 })
+function initGalleryNavigation() {
+  // Wait until krpanoInterface is ready
+  if (!window.krpanoInterface) {
+    console.warn("[GalleryNav] krpanoInterface not ready, retrying...");
+    setTimeout(initGalleryNavigation, 500);
+    return;
+  }
+
+  // Helper: update active state
+  function setActiveByScene(sceneName) {
+    let matchedGallery = null;
+
+    // find which gallery contains this scene
+    Object.keys(galleries).forEach(galleryName => {
+      const gallery = galleries[galleryName];
+      if (gallery.scenes.includes(sceneName)) {
+        matchedGallery = gallery;
+      }
+    });
+
+    if (matchedGallery) {
+      document.querySelectorAll('.Room').forEach(room => {
+        room.classList.remove('active');
+      });
+      const el = document.getElementById(matchedGallery.id);
+      if (el) el.classList.add('active');
+      if (matchedGallery && matchedGallery.image) {
+        transitionMapImage(matchedGallery.image);
+    }
+    }
+  }
+
+  // 1) Register click listeners for each gallery
+  Object.keys(galleries).forEach(galleryName => {
+    const gallery = galleries[galleryName];
+    const el = document.getElementById(gallery.id);
+
+    if (el) {
+      // prevent duplicate listeners
+      el.replaceWith(el.cloneNode(true));
+      const newEl = document.getElementById(gallery.id);
+
+      newEl.addEventListener("click", () => {
+        const firstScene = gallery.scenes[0];
+        console.log(`[GalleryNav] Clicked ${gallery.id} → loadscene(${firstScene})`);
+
+        // Load scene in krpano
+        krpanoInterface.call(`loadscene(${firstScene}, null, MERGE, BLEND(1));`);
+
+        // Show gallery details popup
+        showgallDetails(galleryName, true);
+
+        // Update active state
+        setActiveByScene(firstScene);
+      });
+    } else {
+      console.warn(`[GalleryNav] Element not found for gallery ${galleryName} (id=${gallery.id})`);
+    }
+  });
+
+  // 2) Hook into krpano event when scene changes
+  krpanoInterface.set("events[galleryNavEvents].onnewscene", "js(updateActiveFromKrpano());");
+
+  // Expose a global JS function that krpano can call
+  window.updateActiveFromKrpano = function () {
+    const currentScene = krpanoInterface.get("xml.scene");
+    console.log("[GalleryNav] Scene changed →", currentScene);
+    setActiveByScene(currentScene);
+  };
+
+  // 3) Initial check (highlight the current scene right away)
+  const initialScene = krpanoInterface.get("xml.scene");
+  if (initialScene) {
+    setActiveByScene(initialScene);
+  }
+}
+
+
+
 
 $(document).ready(function () {
+    $(".closemapContainer").click(function(){
+        $(".mapContainerPopup").fadeOut();
+    })
     // Debug SVG load status
     const checkSvg = setInterval(() => {
         const svg = document.querySelector('#svg-map');
@@ -297,6 +379,7 @@ $(document).ready(function () {
             krpanoInterface = krpano;
 
             initializeSceneHandling();
+            initGalleryNavigation();
             setTimeout(() => {
               
                 UpdateActiveRoomFromScene('intro');
@@ -309,7 +392,7 @@ $(document).ready(function () {
 // CORE FUNCTIONALITY
 // =============================================
 let currentGallery = null;
-let showingImageIndex = 1;
+// let showingImageIndex = 1;
 function initializeSceneHandling() {
     // Set up krpano event listeners
     const krpano = document.getElementById("krpanoSWFObject");
@@ -383,8 +466,17 @@ function updateCustomThumbClass(galleryName) {
     }
 }
 
+let showingImageIndex = 1; // start with #map-image-1 visible
+
+// FIXED: transitionMapImage function
 function transitionMapImage(newSrc) {
+    // If it's the same image, don't do anything
+    if (newSrc === currentImageSrc) {
+        return;
+    }
+    
     console.log(`[IMAGE] Transitioning to: ${newSrc}`);
+    currentImageSrc = newSrc;
 
     const currentImg = document.getElementById(`map-image-${showingImageIndex}`);
     const nextImgIndex = showingImageIndex === 1 ? 2 : 1;
@@ -395,11 +487,16 @@ function transitionMapImage(newSrc) {
         return;
     }
 
+    // Preload the next image before transition
+    nextImg.onload = () => {
+        nextImg.classList.add('visible');
+        currentImg.classList.remove('visible');
+        showingImageIndex = nextImgIndex;
+    };
+
     nextImg.src = newSrc;
-    nextImg.classList.add('visible');
-    currentImg.classList.remove('visible');
-    showingImageIndex = nextImgIndex;
 }
+
 
 function highlightActiveRoom(sceneName) {
     console.log(`[HIGHLIGHT] Updating active room for: ${sceneName}`);
