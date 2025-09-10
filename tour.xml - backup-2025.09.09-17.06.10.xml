@@ -84,7 +84,7 @@
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
-		<view hlookat="79.319" vlookat="7.202" fovtype="MFOV" fov="140.000" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+		<view hlookat="79.319" vlookat="7.202" fovtype="MFOV" fov="140.000" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" reset="true"/>
 
 		<preview url="panos/01_2_Pano_G1_Reconstructed_B2.tiles/preview.jpg" />
 
@@ -103,7 +103,7 @@
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" reset="true"/>
 
 		<preview url="panos/02_1_Pano_G1_Reconstructed.tiles/preview.jpg" />
 
@@ -121,7 +121,7 @@
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" reset="true"/>
 
 		<preview url="panos/03_1_Pano_G2_Reconstructed_B2.tiles/preview.jpg" />
 
@@ -133,7 +133,6 @@
 		<hotspot name="spot1695547887" style="defaultHotspot" ath="-15.799" atv="7.074" depth="1000.0" linkedscene="Gallery1" linkedscene_lookat="-97.54,15.59,155.11" />
 		<hotspot name="spot1695548074" style="defaultHotspot" ath="-56.738" atv="5.982" depth="1000.0" linkedscene="Gallery2-1" linkedscene_lookat="-7.27,5.45,162.68" />
 		<hotspot name="Wale_Shark" style="infoHotspot" ath="7.622" atv="-21.247" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery2-1" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('RPN.2018.0355'))"/>
-		<hotspot name="spot1" style="skin_hotspotstyle" ath="287.586" atv="5.047" distorted="false" zoom="false" linkedscene="gallery1" linkedscene_lookat="151.47,21.62,175.76" linkedscene_hoffset="0.0" use3dtransition="true" />
 
 	</scene>
 
@@ -141,7 +140,7 @@
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
-		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
+		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" reset="true"/>
 
 		<preview url="panos/04_1_Pano_G2_Reconstructed.tiles/preview.jpg" />
 
