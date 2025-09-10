@@ -954,16 +954,6 @@ header .navbar .lang a {
     left: 0;
     transition:all 1s ease-in-out;
 }
-.heroSection .videoContainer .videoCardOverlay:hover::after{
-    /* content:"";
-    height:100%;
-    width:100%;
-    background: radial-gradient(circle, rgb(0 0 0 / 26%) 36%, #000000 94%),url(
-    "../media/Ellipse\ 15.png");
-    position:absolute;
-    top: 0;
-    left: 0; */
-}
 .heroSection .videoContainer .videoCardOverlay button{
     border-radius: 100%;
     overflow: hidden;
@@ -1378,10 +1368,67 @@ iframe{
     width: 100vw;
     height: 100vh;
     background-color: rgb(0 0 0 /50%);
+    
 }
-.mapContainerPopup svg{
-    height:60%;
-    width:60%;
+.mapContainerPopup .modal-dialog{
+    height: 100%;
+    max-width: 100%;
+    margin: 0;
+    background-color:transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mapContainerPopup .modal-dialog .modal-content{
+    background-color: rgb(0 0 0 / 59%);
+    backdrop-filter:blur(13px);
+    -webkit-backdrop-filter:blur(13px);
+    /* height: 53%; */
+    width: 45%;
+    border-radius: 0.9rem;
+    overflow: hidden;
+}
+.mapContainerPopup .modal-dialog .modal-content .modal-header{
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    background-image: url("../media/mappopupheaderbg.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none;
+    border-radius: 0;
+}
+.mapContainerPopup .modal-dialog .modal-content .modal-header button{
+    border: none;
+    border-left: 1px solid rgb(255 255 255 / 40%);
+    padding: .6rem;
+}
+.mapContainerPopup .modal-dialog .modal-content .modal-header button svg{
+    height: 0.8rem;
+    width: 1.4rem;
+}
+.mapContainerPopup .modal-dialog .modal-content .modal-body{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    border-radius: 0;
+    padding: 0;
+    background-image: url("../media/grids.png");
+    background-repeat: repeat;
+    background-size: contain;
+    background-position: center;
+}
+.mapContainerPopup .modal-dialog .modal-content .modal-body .galleryName{
+    position:absolute;
+}
+.mapContainerPopup .modal-dialog .modal-content svg{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
 }
 .Room.active path{
     fill:var(--gold);
