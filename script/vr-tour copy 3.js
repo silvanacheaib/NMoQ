@@ -1,3 +1,10 @@
+function startTour() {
+    if (!krpanoInterface) {
+        console.warn("krpano not ready yet!");
+        return;
+    }
+    krpanoInterface.call("playaudio();");
+}
 const galleries = [
     {
         id: 'intro',
@@ -198,30 +205,6 @@ const galleries = [
         image: '../images/floormaps/G11.png'
     }
 ];
-const galleryToRoomMap = {
-    'G1': 'R1',
-    'G2': 'R2',
-    'G3': 'R3',
-    'G4': 'R4',
-    'G5': 'R5',
-    'G6': 'R6',
-    'G7': 'R7',
-    'G8': 'R8',
-    'G9': 'R9',
-    'G10': 'R10',
-    'G11': 'R11'
-};
-let galleryInfoClosed = false;
-let currentGallery = null;
-let showingImageIndex = 1;
-function startTour() {
-    if (!krpanoInterface) {
-        console.warn("krpano not ready yet!");
-        return;
-    }
-    krpanoInterface.call("playaudio();");
-}
-// This function is used to display the artifacts Informations in each gallery
 function showPopupById(galleryId, artifactId = null) {
     const gallery = galleries.find(item => item.id === galleryId);
     if (!gallery || !gallery.artifacts || gallery.artifacts.length === 0) return;
@@ -238,15 +221,15 @@ function showPopupById(galleryId, artifactId = null) {
     $(".right-section img").attr("src", artifact.image);
     $(".vtpopup").fadeIn().addClass("animateItems");
 }
-// This function is used to display the gallery informations
+let galleryInfoClosed = false;
 function showgallDetails(id, forceOpen = false) {
     $(".galleryDetails").addClass("active");
 
     const lang = window.location.href.includes("/ar") ? "ar" : "en";
-
+    
     // FIXED: Find gallery by ID instead of comparing item === id
     const entry = galleries.find(item => item.id === id);
-
+    
     if (!entry) {
         console.warn(`Gallery with id "${id}" not found`);
         $(".galleryInfo").fadeOut();
@@ -258,9 +241,9 @@ function showgallDetails(id, forceOpen = false) {
         $(".galleryDetails").removeClass("active").removeClass("moveCenter");
         return;
     }
-
+    
     if (forceOpen) galleryInfoClosed = false;
-
+    
     const title = lang === "ar" ? (entry.arabic_gallery_title || entry.english_gallery_title)
         : entry.english_gallery_title;
     const description = lang === "ar" ? (entry.arabic_gallery_description || entry.english_gallery_description)
@@ -270,21 +253,89 @@ function showgallDetails(id, forceOpen = false) {
     $(".modal-body .galleryDescription").text(description).attr("dir", lang === "ar" ? "rtl" : "ltr");
     $(".galleryInfo").fadeIn();
 }
-$(document).ready(function () {
-    embedpano({
-        xml: "./tour.xml",
-        target: "pano",
-        onready: function (krpano) {
-            krpanoInterface = krpano;
-            initializeSceneHandling();
+function initGalleryNavigation() {
+    // Wait until krpanoInterface is ready
+    if (!window.krpanoInterface) {
+        console.warn("[GalleryNav] krpanoInterface not ready, retrying...");
+        setTimeout(initGalleryNavigation, 500);
+        return;
+    }
+
+    // Helper: update active state
+    function setActiveByScene(sceneName) {
+        let matchedGallery = null;
+
+        // find which gallery contains this scene
+        Object.keys(galleries).forEach(galleryName => {
+            const gallery = galleries[galleryName];
+            if (gallery.scenes.includes(sceneName)) {
+                matchedGallery = gallery;
+            }
+        });
+
+        if (matchedGallery) {
+            document.querySelectorAll('.Room').forEach(room => {
+                room.classList.remove('active');
+            });
+            const el = document.getElementById(matchedGallery.id);
+            if (el) el.classList.add('active');
+            if (matchedGallery && matchedGallery.image) {
+                transitionMapImage(matchedGallery.image);
+            }
+        }
+    }
+
+    // 1) Register click listeners for each gallery
+    Object.keys(galleries).forEach(galleryName => {
+        const gallery = galleries[galleryName];
+        const el = document.getElementById(gallery.id);
+
+        if (el) {
+            // prevent duplicate listeners
+            el.replaceWith(el.cloneNode(true));
+            const newEl = document.getElementById(gallery.id);
+
+            newEl.addEventListener("click", () => {
+                const firstScene = gallery.scenes[0];
+                console.log(`[GalleryNav] Clicked ${gallery.id} → loadscene(${firstScene})`);
+
+                // Load scene in krpano
+                krpanoInterface.call(`loadscene(${firstScene}, null, MERGE, BLEND(1));`);
+
+                // Show gallery details popup
+                showgallDetails(galleryName, true);
+
+                // Update active state
+                setActiveByScene(firstScene);
+            });
+        } else {
+            console.warn(`[GalleryNav] Element not found for gallery ${galleryName} (id=${gallery.id})`);
         }
     });
+
+    // 2) Hook into krpano event when scene changes
+    krpanoInterface.set("events[galleryNavEvents].onnewscene", "js(updateActiveFromKrpano());");
+
+    // Expose a global JS function that krpano can call
+    window.updateActiveFromKrpano = function () {
+        const currentScene = krpanoInterface.get("xml.scene");
+        console.log("[GalleryNav] Scene changed →", currentScene);
+        setActiveByScene(currentScene);
+    };
+
+    // 3) Initial check (highlight the current scene right away)
+    const initialScene = krpanoInterface.get("xml.scene");
+    if (initialScene) {
+        setActiveByScene(initialScene);
+    }
+}
+$(document).ready(function () {
     $(".closemapContainer").click(function () {
         $(".mapContainerPopup").fadeOut();
     })
     // Debug SVG load status
     const checkSvg = setInterval(() => {
-        const svg = document.querySelector('#mobile-svg');
+        const svg = document.querySelector('#svg-map');
         if (svg) {
             clearInterval(checkSvg);
             console.log("[SVG] Found in DOM, rooms:",
@@ -292,9 +343,21 @@ $(document).ready(function () {
         }
     }, 100);
 
-
+    embedpano({
+        xml: "./tour.xml",
+        target: "pano",
+        onready: function (krpano) {
+            krpanoInterface = krpano;
+            initializeSceneHandling();
+            initGalleryNavigation();
+            setTimeout(() => {
+                //UpdateActiveRoomFromScene('intro');
+            }, 1000);
+        }
+    });
 
 });
+let currentGallery = null;
 function initializeSceneHandling() {
     // Set up krpano event listeners
     const krpano = document.getElementById("krpanoSWFObject");
@@ -304,41 +367,35 @@ function initializeSceneHandling() {
 }
 function handleSceneChange(sceneName) {
     console.log(`[SCENE] Changed to: ${sceneName}`);
-    UpdateActiveRoomFromScene(sceneName);
-    highlightActiveRoom(sceneName);
+    //UpdateActiveRoomFromScene(sceneName);
 }
 function getGalleryByScene(sceneName) {
-    const normalizedScene = sceneName.trim().toLowerCase();
+    const normalizedScene = sceneName.trim();
     for (const gallery of galleries) {
-        if (gallery.scenes.some(s => s.toLowerCase() === normalizedScene)) {
+        if (gallery.scenes.includes(normalizedScene)) {
             return gallery; // Return the object directly
         }
     }
     console.warn(`[WARNING] No gallery found for scene: "${normalizedScene}"`);
     return null;
 }
+// function UpdateActiveRoomFromScene(sceneName) {
+//     console.group(`[UPDATE] Room update for scene: ${sceneName}`);
 
-function UpdateActiveRoomFromScene(sceneName) {
-    console.group(`[UPDATE] Room update for scene: ${sceneName}`);
+//     const gallery = getGalleryByScene(sceneName);
+//     const isNewGallery = gallery && gallery.id !== currentGallery;
 
-    const gallery = getGalleryByScene(sceneName);
-    if (!gallery) {
-        console.warn(`[WARNING] No gallery for scene: ${sceneName}`);
-        console.groupEnd();
-        return;
-    }
+//     if (isNewGallery) {
+//         console.log(`[GALLERY] Changing to: ${gallery.id}`);
+//         currentGallery = gallery.id;
 
-    if (gallery.id !== currentGallery) {
-        console.log(`[GALLERY] Changing to: ${gallery.id}`);
-        currentGallery = gallery.id;
+//         if (gallery.image) transitionMapImage(gallery.image);
+//         updateCustomThumbClass(gallery.id);
+//     }
 
-        if (gallery.image) transitionMapImage(gallery.image);
-        updateCustomThumbClass(gallery.id);
-    }
-
-    console.groupEnd();
-}
-
+//     // highlightActiveRoom(sceneName);
+//     console.groupEnd();
+// }
 function updateCustomThumbClass(galleryId) {
     const customThumb = document.querySelector('.customThumb');
     if (!customThumb) return;
@@ -349,6 +406,8 @@ function updateCustomThumbClass(galleryId) {
     // Add new class
     customThumb.classList.add(`gallery${galleryId}`);
 }
+
+let showingImageIndex = 1;
 function transitionMapImage(newSrc) {
     console.log(`[IMAGE] Transitioning to: ${newSrc}`);
 
@@ -369,108 +428,63 @@ function transitionMapImage(newSrc) {
     };
 
     nextImg.src = newSrc;
-    
 }
-function highlightActiveRoom(sceneName) {
-    console.log(`[HIGHLIGHT] Updating active room for: ${sceneName}`);
+// function highlightActiveRoom(sceneName) {
+//     const gallery = getGalleryByScene(sceneName);
+//     if (!gallery) return;
 
-    // Clear previous highlights
-    document.querySelectorAll('.mapContainerPopup svg g.Room').forEach(room => {
-        room.classList.remove('active', 'clicked');
-    });
+//     // Clear previous
+//     document.querySelectorAll('.mapContainerPopup svg g.Room').forEach(room => {
+//         room.classList.remove('active', 'clicked');
+//     });
 
-    const gallery = getGalleryByScene(sceneName);
-    if (!gallery) return;
+//     // Highlight new
+//     const roomElement = document.getElementById(gallery.id);
+//     if (roomElement) {
+//         roomElement.classList.add('active', 'clicked');
+//         centerActiveRoom();
+//     } else {
+//         console.error(`[ERROR] Room element not found with ID: ${gallery.id}`);
+//         console.log('Available rooms:', Array.from(document.querySelectorAll('.Room')).map(r => r.id));
+//     }
+// }
 
-    // Skip galleries without ID (like 'intro')
-    if (!gallery.id) return;
-
-    // Map gallery ID to room ID
-    const roomId = galleryToRoomMap[gallery.id];
-    if (!roomId) return;
-
-    const roomElement = document.getElementById(roomId);
-    if (roomElement) {
-        roomElement.classList.add('active', 'clicked');
-        console.log(`[SUCCESS] Highlighted room: ${roomId}`);
-        if (typeof centerActiveRoom === 'function') centerActiveRoom();
-    }
-}
 function centerActiveRoom() {
-    const svg = document.querySelector('#mobile-svg');
-    if (!svg) return;
+    const container = document.querySelector('.map-container');
+    const svg = document.getElementById('svg-map');
+    const activeRoom = svg?.querySelector('.Room.active');
 
-    const activeRoom = svg.querySelector('g.Room.active');
-    if (!activeRoom) return;
+    if (!activeRoom || !svg || !container) {
+        console.error("[ERROR] Elements missing for centering");
+        return;
+    }
 
-    const svgRect = svg.getBoundingClientRect();
-    const roomRect = activeRoom.getBoundingClientRect();
+    // Calculate container and room dimensions
+    const containerRect = container.getBoundingClientRect();
+    const viewBox = svg.getAttribute('viewBox').split(' ').map(Number);
+    const roomBox = activeRoom.getBBox();
+    const scale = 2.3;
 
-    // Calculate center difference
-    const svgCenterX = svgRect.width / 2;
-    const svgCenterY = svgRect.height / 2;
-    const roomCenterX = roomRect.left + roomRect.width / 2 - svgRect.left;
-    const roomCenterY = roomRect.top + roomRect.height / 2 - svgRect.top;
+    // Calculate room center
+    const roomCenterX = roomBox.x + roomBox.width / 2;
+    const roomCenterY = roomBox.y + roomBox.height / 2;
 
-    const deltaX = svgCenterX - roomCenterX;
-    const deltaY = svgCenterY - roomCenterY;
+    // Calculate translation
+    let translateX = containerRect.width / 2 - roomCenterX * scale;
+    let translateY = containerRect.height / 2 - roomCenterY * scale;
 
-    const scale = 1.6; // Zoom level
+    // Apply constraints
+    const minTranslateX = containerRect.width - viewBox[2] * scale;
+    const minTranslateY = containerRect.height - viewBox[3] * scale;
+    translateX = Math.min(Math.max(translateX, minTranslateX), 0);
+    translateY = Math.min(Math.max(translateY, minTranslateY), 0);
 
-    // Convert pixels to rem (assuming 1rem = 16px, adjust if different)
-    const remX = deltaX / 16 / scale;
-    const remY = deltaY / 16 / scale;
-
-    svg.style.transition = 'transform 0.5s ease';
+    // Apply transformation
     svg.style.transformOrigin = '0 0';
-    svg.style.transform = `scale(${scale}) translate(${remX}rem, ${remY}rem)`;
+    svg.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+    // console.log(`[CENTER] Centered room with scale: ${scale}`);
 }
-function resetMapZoom() {
-    const svg = document.querySelector('#mobile-svg');
-    if (!svg) return;
-    svg.style.transition = 'transform 0.5s ease';
-    svg.style.transform = 'scale(1) translate(0px, 0px)';
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 function waitForKrpano(callback) {
     const interval = setInterval(() => {
         const krpano = document.getElementById("krpanoSWFObject");
@@ -513,6 +527,7 @@ $(".infoHotspot").click(function () {
     const $modal = $(this).closest(".galleryInfo");
 
     $modal.removeClass("active").fadeOut(400, function () {
+        // this callback runs after fadeOut is complete
         $modal.removeClass("moveCenter");
     });
     $(".galleryDetails").removeClass("active");
@@ -521,14 +536,16 @@ $(".infoHotspot").click(function () {
 $(".galleryInfo").on("click", ".close", function () {
     const $modal = $(this).closest(".galleryInfo");
 
-    $modal.removeClass("active");
-    $modal.removeClass("moveCenter");
+    $modal.removeClass("active").fadeOut(400, function () {
+        // this callback runs after fadeOut is complete
+        $modal.removeClass("moveCenter");
+    });
     $(".galleryDetails").removeClass("active");
-    //galleryInfoClosed = true;
+    galleryInfoClosed = true;
 });
 $(".galleryDetails").click(function () {
     $(this).addClass("active");
 })
 $('.galleryInfo .modal-footer button').click(function () {
-    $(".galleryInfo").addClass("moveCenter").addClass("visible");
+    $(".galleryInfo").addClass("moveCenter");
 })

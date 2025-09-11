@@ -67,7 +67,7 @@
 				   left:35%!important;" 
 	               design_text_shadow="1"
 	               />
-	<scene name="intro" nextscene="Gallery1" title="Intro" onstart="actioner();add_next_scene_thumb_hotspot();handle_audio();" soundurl=""  thumburl="panos/38_1_Pano_Entrance_Reconstructed.tiles/thumb.jpg">
+	<scene name="intro" title="Intro" onstart="actioner();add_next_scene_thumb_hotspot();handle_audio();" soundurl=""  thumburl="panos/38_1_Pano_Entrance_Reconstructed.tiles/thumb.jpg">
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
 		<view hlookat="108.500" vlookat="10.156" fovtype="MFOV" fov="140.000" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
@@ -80,7 +80,7 @@
 		<hotspot name="spot1695555570"  type="image"  style="defaultHotspot" ath="114.623" atv="2.211" linkedscene="Gallery1"  linkedscene_lookat="81.0,8.43,144.26"></hotspot>
 		
 	</scene>
-	<scene name="Gallery1" nextscene="Gallery1-2" title="G1"  onstart="actioner();delayedcall(1, lookto(40.62, 17.25, 140, 4));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));add_next_scene_thumb_hotspot();)" soundurl="" thumburl="panos/01_2_Pano_G1_Reconstructed_B2.tiles/thumb.jpg">
+	<scene title="G1" name="Gallery1"   onstart="actioner();delayedcall(1, lookto(40.62, 17.25, 140, 4));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));add_next_scene_thumb_hotspot();)" soundurl="" thumburl="panos/01_2_Pano_G1_Reconstructed_B2.tiles/thumb.jpg">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -98,8 +98,7 @@
 		<hotspot name="spot1718195525"  style="infoHotspot" ath="-30.726" atv="5.383" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('G1','RPN.2018.0001'))"/>
 		<hotspot name="spot1718828530" type="image" style="defaultHotspot" ath="-116.468" atv="12.481" linkedscene="intro" linkedscene_lookat="-58.5,-2.23,157.1" />
 	</scene>
-
-	<scene name="Gallery1-2" title="G1" thumburl="panos/02_1_Pano_G1_Reconstructed.tiles/thumb.jpg" onstart="actioner();delayedcall(1, lookto(0,18.48,140,2));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)"  lat="" lng="" alt="" heading="" soundurl="">
+	<scene title="G1" name="Gallery1-2"  thumburl="panos/02_1_Pano_G1_Reconstructed.tiles/thumb.jpg" onstart="actioner();delayedcall(1, lookto(0,18.48,140,2));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)"  lat="" lng="" alt="" heading="" soundurl="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -116,8 +115,7 @@
 		<hotspot name="fossil_skeleton" style="infoHotspot" ath="-85.849" atv="7.628" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery1-2" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('G1','QM.2018.0147'))"/>
 
 	</scene>
-
-	<scene name="Gallery2" title="Gallery 2" onstart="actioner(); lookat(120,0,140); delayedcall(1.5, lookto(365, 2, 400));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/03_1_Pano_G2_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="" soundurl="">
+	<scene title="G2" name="Gallery2"  onstart="actioner(); lookat(120,0,140); delayedcall(1.5, lookto(365, 2, 400));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/03_1_Pano_G2_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="" soundurl="">
 		<control bouncinglimits="calc:image.cube ? true : false" />
 		<view hlookat="0.0" vlookat="0.0" fovtype="MFOV" fov="120" maxpixelzoom="1.0" fovmin="140" fovmax="140" limitview="auto" />
 		<preview url="panos/03_1_Pano_G2_Reconstructed_B2.tiles/preview.jpg" />
@@ -129,8 +127,7 @@
 		<hotspot name="spot1695548074" style="defaultHotspot" ath="-56.738" atv="5.982" depth="1000.0" linkedscene="Gallery2-1" linkedscene_lookat="-7.27,5.45,162.68" />
 		<hotspot name="Wale_Shark" style="infoHotspot" ath="7.622" atv="-21.247" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery2-1" linkedscene_hoffset="0.0" use3dtransition="true" onclick="js(showPopupById('G2','RPN.2018.0355'))"/>
 	</scene>
-
-	<scene name="Gallery2-1" title="Gallery 2" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/04_1_Pano_G2_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene title="G2" name="Gallery2-1"  onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/04_1_Pano_G2_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -145,8 +142,7 @@
 		<hotspot name="spot1718816875" style="defaultHotspot" ath="-146.926" atv="8.305" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery2" linkedscene_lookat="135.5,8.92,157.85" />
 
 	</scene>
-
-	<scene name="Gallery2-2" title="Gallery 2" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/05_1_Pano_G2_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene title="G2" name="Gallery2-2"  onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/05_1_Pano_G2_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -162,8 +158,7 @@
 		<hotspot name="spot1718046100" style="defaultHotspot" ath="93.448" atv="8.703" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery2" linkedscene_lookat="-182.27,0.42,144.22" />
 
 	</scene>
-
-	<scene name="Gallery3" title="Gallery 3" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/06_1_Pano_G3_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene title="G3" name="Gallery3"  onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/06_1_Pano_G3_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -179,8 +174,7 @@
 		<hotspot name="spot1718045752" style="defaultHotspot" ath="-61.933" atv="12.593" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery2-2" linkedscene_lookat="114.82,7.04,154.01" />
 
 	</scene>
-
-	<scene name="Gallery3-1" title="Gallery 3" onstart="actioner();delayedcall(1, lookto(430, 0, 400));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/07_1_Pano_G3_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene title="G3" name="Gallery3-1"  onstart="actioner();delayedcall(1, lookto(430, 0, 400));handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/07_1_Pano_G3_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -196,8 +190,7 @@
 		<hotspot name="spot1695548796" style="defaultHotspot" ath="88.151" atv="7.852" depth="1000.0" linkedscene="Gallery3-3" linkedscene_lookat="83.34,3.37,151.79" />
 
 	</scene>
-
-	<scene name="Gallery3-2" title="Gallery 3" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/08_1_Pano_G3_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene title="G3" name="Gallery3-2"  onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/08_1_Pano_G3_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -210,8 +203,7 @@
 		</image>
 
 	</scene>
-
-	<scene name="Gallery3-3" title="Gallery 3" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/09_1_Pano_G3_Reconstructed_b2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene title="G3" name="Gallery3-3"  onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/09_1_Pano_G3_Reconstructed_b2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -227,8 +219,7 @@
 		<hotspot name="spot1718818225" style="defaultHotspot" ath="-97.739" atv="16.497" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery3-1" linkedscene_lookat="-90.52,-0.8,146.94" />
 
 	</scene>
-
-	<scene name="Gallery3-4" title="Gallery 3" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/10_1_Pano_G3_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene title="G3" name="Gallery3-4"  onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/10_1_Pano_G3_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -244,8 +235,7 @@
 		<hotspot name="spot1718817982" style="defaultHotspot" ath="125.938" atv="10.808" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery3-3" linkedscene_lookat="-107.75,1.58,138.32" />
 
 	</scene>
-
-	<scene name="Gallery4" title="Gallery 4" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/11_1_Pano_G4_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene title="G4" name="Gallery4"  onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/11_1_Pano_G4_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -262,8 +252,7 @@
 		<hotspot name="spot1718817778" style="defaultHotspot" ath="78.993" atv="9.457" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery3-4" linkedscene_lookat="138.88,6.99,144.17" />
 
 	</scene>
-
-	<scene name="Gallery4-1" title="Gallery 4" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/12_1_Pano_G4_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene title="G4" name="Gallery4-1"  onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/12_1_Pano_G4_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -278,8 +267,7 @@
 		<hotspot name="spot1718046617" style="defaultHotspot" ath="-19.028" atv="3.834" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery4-2" linkedscene_lookat="29.01,3.04,154.03" />
 
 	</scene>
-
-	<scene name="Gallery4-2" title="Gallery 4" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/13_1_Pano_G4_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene title="G4" name="Gallery4-2"  onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/13_1_Pano_G4_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -296,8 +284,7 @@
 		<hotspot name="spot1718819810" style="defaultHotspot" ath="176.074" atv="5.026" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery4" linkedscene_lookat="-74.06,1.22,146.95" />
 
 	</scene>
-
-	<scene name="Gallery5" title="Gallery 5" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/14_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene title="G5" name="Gallery5"  onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/14_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -314,8 +301,7 @@
 		<hotspot name="spot1718819351" style="defaultHotspot" ath="132.622" atv="3.938" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery4-2" linkedscene_lookat="250.84,5.19,149.46" />
 
 	</scene>
-
-	<scene name="Gallery5-1" title="Gallery 5" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/15_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery5-1" title="G5" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/15_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -331,8 +317,7 @@
 		<hotspot name="spot1718819190" style="defaultHotspot" ath="15.654" atv="5.704" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery5" linkedscene_lookat="-182.16,8.28,143.9" />
 
 	</scene>
-
-	<scene name="Gallery5-2" title="Gallery 5" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/16_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery5-2" title="G5" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/16_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -348,8 +333,7 @@
 		<hotspot name="spot1718818952" style="defaultHotspot" ath="-33.325" atv="10.557" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery5-1" linkedscene_lookat="58.18,-5.26,144.28" />
 
 	</scene>
-
-	<scene name="Gallery5-3" title="Gallery 5" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/17_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery5-3" title="G5" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/17_1_Pano_G5_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -365,8 +349,7 @@
 		<hotspot name="spot1718820314" style="defaultHotspot" ath="-81.454" atv="-5.055" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery5-2" linkedscene_lookat="-94.2,4.49,135.08" />
 
 	</scene>
-
-	<scene name="Gallery6" title="Gallery 6" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/18_1_Pano_G6_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery6" title="G6" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/18_1_Pano_G6_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -383,8 +366,7 @@
 		<hotspot name="spot1718820185" style="defaultHotspot" ath="165.248" atv="14.007" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery5-3" linkedscene_lookat="-80.17,7.84,141.24" />
 
 	</scene>
-
-	<scene name="Gallery6-1" title="Gallery 6" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/19_1_Pano_G6_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery6-1" title="G6" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/19_1_Pano_G6_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -399,8 +381,7 @@
 		<hotspot name="spot1718820575" style="defaultHotspot" ath="-106.044" atv="13.82" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery6" linkedscene_lookat="67.28,4.16,146.87" />
 
 	</scene>
-
-	<scene name="Gallery6-2" title="Gallery 6" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/20_1_Pano_G6_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery6-2" title="G6" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/20_1_Pano_G6_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -413,8 +394,7 @@
 		</image>
 
 	</scene>
-
-	<scene name="Gallery6-3" title="Gallery 6" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/21_1_Pano_G6_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery6-3" title="G6" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/21_1_Pano_G6_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -430,8 +410,7 @@
 		<hotspot name="spot1718820926" style="defaultHotspot" ath="50.164" atv="4.402" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery6" linkedscene_lookat="123.74,12.51,147.0" />
 
 	</scene>
-
-	<scene name="Gallery7" title="Gallery 7" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/22_1_Pano_G7_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery7" title="G7" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/22_1_Pano_G7_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -446,8 +425,7 @@
 		<hotspot name="spot1695552320" style="defaultHotspot" ath="79.639" atv="9.28" depth="1000.0" linkedscene="Gallery7-1" linkedscene_lookat="9.45,3.37,157.77" />
 
 	</scene>
-
-	<scene name="Gallery7-1" title="Gallery 7" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/23_1_Pano_G7_2_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery7-1" title="G7" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));)" thumburl="panos/23_1_Pano_G7_2_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -463,8 +441,7 @@
 		<hotspot name="spot1718821881" style="defaultHotspot" ath="-88.479" atv="12.049" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery7" linkedscene_lookat="264.96,23.49,144.18" />
 
 	</scene>
-
-	<scene name="Gallery7-2" title="Gallery 7" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/24_1_Pano_G7_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery7-2" title="G7" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/24_1_Pano_G7_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -480,8 +457,7 @@
 		<hotspot name="spot1718821696" style="defaultHotspot" ath="17.468" atv="10.26" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery7-1" linkedscene_lookat="85.53,3.84,161.16" />
 
 	</scene>
-
-	<scene name="Gallery7-3" title="Gallery 7" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/25_1_Pano_G7_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery7-3" title="G7" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/25_1_Pano_G7_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -497,8 +473,7 @@
 		<hotspot name="spot1718821476" style="defaultHotspot" ath="-160.177" atv="12.591" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery7-2" linkedscene_lookat="20.46,13.55,162.62" />
 
 	</scene>
-
-	<scene name="Gallery8" title="Gallery 8" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/26_1_Pano_G8_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery8" title="G8" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/26_1_Pano_G8_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -514,8 +489,7 @@
 		<hotspot name="spot1718822244" style="defaultHotspot" ath="17.201" atv="12.389" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery7-3" linkedscene_lookat="-99.16,-4.05,155.98" />
 
 	</scene>
-
-	<scene name="Gallery8-1" title="Gallery 8" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/27_1_Pano_G8_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery8-1" title="G8" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/27_1_Pano_G8_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -531,8 +505,7 @@
 		<hotspot name="spot1718822476" style="defaultHotspot" ath="-172.723" atv="12.155" depth="4000.0" distorted="false" zoom="false" linkedscene="Gallery8" linkedscene_lookat="27.5,13.1,144.06" />
 
 	</scene>
-
-	<scene name="Gallery8-2" title="Gallery 8" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/28_1_Pano_G8_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery8-2" title="G8" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/28_1_Pano_G8_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -549,7 +522,7 @@
 
 	</scene>
 
-	<scene name="Gallery8-3" title="Gallery 8" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/29_2_Pano_G8_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery8-3" title="G8" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/29_2_Pano_G8_Reconstructed_B2.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -566,7 +539,7 @@
 
 	</scene>
 
-	<scene name="Gallery9" title="Gallery 9" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/30_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery9" title="G9" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/30_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -583,7 +556,7 @@
 
 	</scene>
 
-	<scene name="Gallery9-1" title="Gallery 9" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/31_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery9-1" title="G9" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/31_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -600,7 +573,7 @@
 
 	</scene>
 
-	<scene name="Gallery9-2" title="Gallery 9" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/32_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery9-2" title="G9" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/32_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 
@@ -617,7 +590,7 @@
 
 	</scene>
 
-	<scene name="Gallery9-3" title="Gallery 9" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/33_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
+	<scene name="Gallery9-3" title="G9" onstart="actioner();handle_audio();js(showgallDetails(get(scene[get(xml.scene)].title));" thumburl="panos/33_1_Pano_G9_Reconstructed.tiles/thumb.jpg" lat="" lng="" alt="" heading="">
 		
 		<control bouncinglimits="calc:image.cube ? true : false" />
 

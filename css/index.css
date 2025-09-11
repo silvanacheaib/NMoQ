@@ -45,15 +45,9 @@ html, body{
     width: 25rem;
     height: auto;
     background: linear-gradient(to right, rgb(0 0 0 / 38%), rgb(0 0 0 / 42%), transparent);
-    transition: all .7s ease-in-out;
     top: 10rem;
-    opacity:0;
-    transform:translateX(-100%);
     border-radius:0!important;
     z-index: 2;
-}
-.galleryInfo.modal[style="display: block;"]{
-    animation:1s fadeLeft .3s forwards;
 }
 .galleryInfo.modal .galleryTitle{font-size: 1.15rem;color:white;}
 .galleryInfo.modal .galleryDescription{
@@ -65,10 +59,22 @@ html, body{
     font-size: 0.9rem;
     line-height:1.8;
 }
+@keyframes moveToCenter{
+    0%{
+         top: 10rem;
+        left:0;
+        transform:translate(0,0);
+    }
+    100%{
+         left: 50%;
+         top: 50%;
+         transform:translate(-50%,-50%)
+    }
+}
 .galleryInfo.modal.moveCenter {
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%)!important;
+    /* left: 50%; */
+    /* top: 50%; */
+    /* transform: translate(-50%, -50%)!important; */
     height: auto;
     max-height: 50%;
     width: 40%;
@@ -78,6 +84,8 @@ html, body{
     background: linear-gradient(to right, rgb(0 0 0 / 25%), rgb(0 0 0 / 42%));
     backdrop-filter: blur(31px);
     text-align: justify;
+    animation: 1s moveToCenter forwards;
+    opacity: 1;
 }
 .galleryInfo.modal.moveCenter .modal-body .galleryDescription{
     display: block!important;
@@ -690,6 +698,30 @@ header {
     animation: 1s navbar-reveal forwards;
     display: block;
     opacity: 1;
+}
+.tourStarted header::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background: linear-gradient(rgb(0 0 0 / 71%),rgb(0 0 0 / 39%), #00000000);
+
+  /* Smooth glass blur effect */
+  /* backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px); */
+
+  /* Remove harsh borders */
+  border: none;
+  box-shadow: none;
+
+  /* Optional: smooth transitions if opacity changes */
+  transition: backdrop-filter 0.3s ease, background 0.3s ease;
+
+  /* Optional: smooth transition if you animate it later */
+  transition: all 0.3s ease;
+    
 }
 header .navbar {
     z-index: 99;
